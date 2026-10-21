@@ -193,11 +193,6 @@
         <i id="music-icon" class="fas fa-music text-gold text-xs ml-1"></i>
     </button>
 
-    <!-- FLOATING QUICK EDIT TOGGLE BUTTON -->
-    <button id="edit-toggle" onclick="toggleEditModal()" class="fixed bottom-5 right-5 z-40 bg-burgundy text-gold p-3.5 rounded-full shadow-xl hover:scale-110 active:scale-95 transition-all border border-gold/50 flex items-center justify-center" title="Edit Invitation Details">
-        <i class="fas fa-pen-to-square text-lg"></i>
-    </button>
-
     <!-- ========================================== -->
     <!-- 1. CINEMATIC COVER SCREEN (TAP TO OPEN)   -->
     <!-- ========================================== -->
@@ -221,9 +216,9 @@
             </div>
 
             <h1 class="font-serif text-3xl sm:text-4xl text-burgundy font-light tracking-wide mb-2">
-                <span data-key="brideName">Arya</span> 
+                <span data-key="brideName">Jane</span> 
                 <span class="font-script text-gold text-2xl sm:text-3xl">&amp;</span> 
-                <span data-key="groomName">John Doe</span>
+                <span data-key="groomName">Daniel</span>
             </h1>
             <p class="text-xs uppercase tracking-[0.2em] text-charcoal/70 mt-1" data-key="weddingDateShort">DECEMBER 18, 2026</p>
         </div>
@@ -252,9 +247,6 @@
             <div class="absolute bottom-4 right-4 w-12 h-12 border-b-2 border-r-2 border-gold/40 pointer-events-none"></div>
 
             <div class="pt-8 max-w-lg mx-auto">
-                <p class="font-serif italic text-2xl sm:text-3xl text-burgundy mb-4 font-normal px-4 leading-snug" data-key="topQuote">
-                    "Two souls, one heart, a lifetime of love to share."
-                </p>
                 <div class="w-16 h-[1.5px] bg-gold mx-auto mb-5"></div>
                 <p class="text-sm sm:text-base tracking-[0.3em] uppercase text-gold-dark font-semibold mb-3">Together With Their Families</p>
                 <p class="font-serif italic text-lg sm:text-xl text-charcoal/80">Invite you to celebrate their wedding day</p>
@@ -426,240 +418,178 @@
         </section>
 
 
-        <!-- WHATSAPP & SHARE SECTION -->
-        <section class="py-16 px-4 bg-white text-center border-t border-gold/20">
-            <div class="max-w-md mx-auto space-y-6">
-                <h3 class="font-serif text-2xl text-burgundy">Share The Joy</h3>
-                <p class="text-xs text-charcoal/70">Invite your friends and family by sending them this digital invitation link on WhatsApp.</p>
-                
-                <button onclick="shareOnWhatsApp()" class="w-full bg-[#25D366] text-white py-3.5 px-6 rounded-full font-medium text-sm flex items-center justify-center gap-2 shadow-lg hover:bg-[#20ba5a] active:scale-95 transition-all">
-                    <i class="fab fa-whatsapp text-xl"></i>
-                    <span>Share Invitation via WhatsApp</span>
-                </button>
+        <!-- BLESSINGS & GUESTBOOK SECTION -->
+        <section class="py-20 px-4 bg-ivory text-center relative">
+            <div class="max-w-xl mx-auto">
+                <span class="text-xs uppercase tracking-[0.3em] text-gold-dark font-medium">Show Your Love</span>
+                <h2 class="font-serif text-3xl sm:text-4xl text-burgundy mt-1 mb-4">Send Blessings &amp; Wishes</h2>
+                <p class="text-xs text-charcoal/70 max-w-md mx-auto mb-8 font-light">
+                    Your warm wishes and blessings will fill our special day with happiness and cherished memories.
+                </p>
+
+                <!-- Message Box Form -->
+                <div class="bg-white rounded-2xl p-6 shadow-xl border border-gold/30 text-left">
+                    <form onsubmit="submitBlessing(event)" class="space-y-4 text-xs">
+                        <div>
+                            <label class="block text-charcoal/80 font-medium mb-1">Your Name</label>
+                            <input id="guest-name" type="text" required placeholder="e.g. John & Sarah Smith" class="w-full p-3 border border-gold/30 rounded-xl focus:outline-none focus:border-gold text-sm bg-sand/30">
+                        </div>
+                        <div>
+                            <label class="block text-charcoal/80 font-medium mb-1">Your Blessing or Message</label>
+                            <textarea id="guest-message" rows="3" required placeholder="May your joining bring you more joy than you can imagine..." class="w-full p-3 border border-gold/30 rounded-xl focus:outline-none focus:border-gold text-sm bg-sand/30"></textarea>
+                        </div>
+                        <button type="submit" class="w-full gold-btn py-3 rounded-xl text-white font-medium uppercase tracking-wider text-xs shadow-md">
+                            <i class="fas fa-paper-plane mr-2"></i> Send Blessings
+                        </button>
+                    </form>
+
+                    <!-- Success Alert Message -->
+                    <div id="blessing-status" class="hidden mt-4 p-3 bg-emerald-50 text-emerald-800 border border-emerald-200 rounded-xl text-xs text-center font-medium">
+                        ✨ Thank you! Your beautiful blessing has been sent to the couple! ✨
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- UNIFIED GREETINGS SECTION (DARK BACKGROUND) -->
+        <section class="py-20 px-6 bg-burgundy text-sand text-center relative border-t border-gold/30">
+            <div class="max-w-2xl mx-auto">
+                <div class="w-12 h-12 rounded-full bg-gold/20 text-gold flex items-center justify-center mx-auto mb-4 text-lg border border-gold/40">
+                    <i class="fas fa-hands-praying"></i>
+                </div>
+                <span class="text-xs uppercase tracking-[0.3em] text-gold font-medium">With Warm Regards</span>
+                <h2 class="font-serif text-3xl sm:text-4xl text-gold-light mt-1 mb-8">Greetings &amp; Best Wishes</h2>
+
+                <!-- Single Unified Greeting Card -->
+                <div class="bg-black/20 backdrop-blur-md p-8 sm:p-10 rounded-2xl border border-gold/30 shadow-2xl relative overflow-hidden">
+                    <!-- Subtle Background Accent Glow -->
+                    <div class="absolute -top-10 -left-10 w-32 h-32 bg-gold/10 rounded-full blur-2xl pointer-events-none"></div>
+                    <div class="absolute -bottom-10 -right-10 w-32 h-32 bg-gold/10 rounded-full blur-2xl pointer-events-none"></div>
+
+                    <h3 class="font-serif text-2xl sm:text-3xl text-gold font-normal mb-3">From Both Families</h3>
+                    <p class="text-xs sm:text-sm text-sand/90 leading-relaxed font-light italic max-w-lg mx-auto">
+                        "With thankful hearts and overflowing joy, we invite you to join us in celebrating this union. Together as two families becoming one, we look forward to sharing this momentous day with our dearest relatives and friends."
+                    </p>
+                    
+                    <div class="w-16 h-[1px] bg-gold/50 mx-auto my-6"></div>
+                    
+                    <p class="font-script text-2xl sm:text-3xl text-gold-light">
+                        The Families of <span data-key="brideName">Jane</span> &amp; <span data-key="groomName">Daniel</span>
+                    </p>
+                </div>
             </div>
         </section>
 
 
         <!-- FOOTER -->
-        <footer class="py-12 bg-burgundy text-sand text-center text-xs">
-            <p class="font-serif text-lg text-gold mb-2">Arya &amp; John Doe</p>
-            <p class="opacity-70">We look forward to celebrating our special day with you!</p>
-            <p class="opacity-40 text-[10px] mt-6 tracking-widest uppercase">Digital Wedding Invitation</p>
+        <footer class="py-12 bg-ivory text-charcoal text-center text-xs border-t border-gold/30">
+            <p class="font-serif text-lg text-gold-dark font-semibold mb-2" data-key="brideName">Jane &amp; Daniel</p>
+            <p class="text-charcoal/70 font-light">With love and gratitude. We look forward to celebrating with you!</p>
         </footer>
 
     </main>
 
-
-    <!-- ========================================== -->
-    <!-- LIGHTBOX MODAL FOR GALLERY                 -->
-    <!-- ========================================== -->
-    <div id="lightbox-modal" class="fixed inset-0 z-50 bg-black/90 hidden flex items-center justify-center p-4 backdrop-blur-sm" onclick="closeLightbox()">
-        <button class="absolute top-5 right-5 text-white text-2xl p-2" onclick="closeLightbox()"><i class="fas fa-xmark"></i></button>
-        <img id="lightbox-img" src="" alt="Enlarged gallery photo" class="max-w-full max-h-[85vh] rounded-lg object-contain border-2 border-gold/50 shadow-2xl">
-    </div>
-
-
-    <!-- ========================================== -->
-    <!-- EDITABLE CONFIG MODAL                      -->
-    <!-- ========================================== -->
-    <div id="edit-modal" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm hidden flex items-center justify-center p-4 overflow-y-auto">
-        <div class="bg-white rounded-2xl max-w-lg w-full p-6 shadow-2xl border border-gold max-h-[90vh] overflow-y-auto">
-            <div class="flex justify-between items-center mb-6 border-b pb-3">
-                <h3 class="font-serif text-2xl text-burgundy font-bold"><i class="fas fa-sliders text-gold mr-2"></i>Customize Details</h3>
-                <button onclick="toggleEditModal()" class="text-charcoal/60 hover:text-charcoal text-xl"><i class="fas fa-xmark"></i></button>
-            </div>
-
-            <form id="edit-form" onsubmit="saveCustomizations(event)" class="space-y-4 text-xs text-left">
-                <div>
-                    <label class="block font-semibold mb-1 text-charcoal">Top Header Quote</label>
-                    <input type="text" id="input-topQuote" class="w-full p-2.5 border rounded-lg focus:ring-1 focus:ring-gold outline-none">
-                </div>
-                <div>
-                    <label class="block font-semibold mb-1 text-charcoal">Bride's Name</label>
-                    <input type="text" id="input-brideName" class="w-full p-2.5 border rounded-lg focus:ring-1 focus:ring-gold outline-none">
-                </div>
-                <div>
-                    <label class="block font-semibold mb-1 text-charcoal">Groom's Name</label>
-                    <input type="text" id="input-groomName" class="w-full p-2.5 border rounded-lg focus:ring-1 focus:ring-gold outline-none">
-                </div>
-                <div>
-                    <label class="block font-semibold mb-1 text-charcoal">Wedding Date (YYYY-MM-DD)</label>
-                    <input type="date" id="input-weddingDate" class="w-full p-2.5 border rounded-lg focus:ring-1 focus:ring-gold outline-none">
-                </div>
-                <div>
-                    <label class="block font-semibold mb-1 text-charcoal">Wedding Time Description</label>
-                    <input type="text" id="input-weddingTime" class="w-full p-2.5 border rounded-lg focus:ring-1 focus:ring-gold outline-none">
-                </div>
-                <div>
-                    <label class="block font-semibold mb-1 text-charcoal">Venue Name</label>
-                    <input type="text" id="input-venueName" class="w-full p-2.5 border rounded-lg focus:ring-1 focus:ring-gold outline-none">
-                </div>
-                <div>
-                    <label class="block font-semibold mb-1 text-charcoal">Venue Address</label>
-                    <input type="text" id="input-venueAddress" class="w-full p-2.5 border rounded-lg focus:ring-1 focus:ring-gold outline-none">
-                </div>
-                <div>
-                    <label class="block font-semibold mb-1 text-charcoal">Google Maps Link</label>
-                    <input type="url" id="input-mapsLink" class="w-full p-2.5 border rounded-lg focus:ring-1 focus:ring-gold outline-none">
-                </div>
-                <div>
-                    <label class="block font-semibold mb-1 text-charcoal">Hero Image URL</label>
-                    <input type="url" id="input-heroImage" class="w-full p-2.5 border rounded-lg focus:ring-1 focus:ring-gold outline-none">
-                </div>
-
-                <div class="pt-4 flex gap-3">
-                    <button type="button" onclick="toggleEditModal()" class="w-1/2 py-3 border border-charcoal/30 text-charcoal rounded-xl font-medium">Cancel</button>
-                    <button type="submit" class="w-1/2 gold-btn text-white py-3 rounded-xl font-medium shadow-md">Save Changes</button>
-                </div>
-            </form>
-        </div>
-    </div>
-
-
-    <!-- ========================================== -->
-    <!-- JAVASCRIPT LOGIC & CONFIGURATION           -->
-    <!-- ========================================== -->
+    <!-- JavaScript Functions & Interactive Controllers -->
     <script>
-        /* ----------------------------------------------------
-         * EDITABLE WEDDING DATA CONFIGURATION OBJECT
-         * ---------------------------------------------------- */
-        let WEDDING_DATA = {
-            topQuote: '"Two souls, one heart, a lifetime of love to share."',
-            brideName: "Arya",
-            groomName: "John Doe",
-            weddingDate: "2026-12-18", // YYYY-MM-DD for countdown calculation
-            weddingTime: "4:30 PM Onwards",
-            weddingDay: "Friday",
-            weddingDateFull: "December 18, 2026",
-            weddingDateShort: "DECEMBER 18, 2026",
-            venueName: "The Grand Palace Hotel & Resort",
-            venueAddress: "123 Royal Boulevard, Beverly Hills, CA 90210",
-            ceremonyTime: "4:30 PM",
-            receptionTime: "7:00 PM",
-            mapsLink: "https://maps.google.com",
-            heroSubtext: '"Two lives, two hearts, joined together in friendship, united forever in love."',
-            blessingQuote: '"Love is patient, love is kind. It always protects, always trusts, always hopes, always perseveres."',
-            invitationText: "As we begin this beautiful new chapter of our lives, your presence, blessings, and love would mean the world to us. Please join us in celebrating our marriage ceremony and reception.",
-            familyBlessing: "With the blessings of Parents & Grandparents",
-            heroImage: "https://images.unsplash.com/photo-1583939003579-730e3918a45a?auto=format&fit=crop&w=800&q=80",
-            galleryPhotos: [
-                "https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=600&q=80",
-                "https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=600&q=80",
-                "https://images.unsplash.com/photo-1520854221256-17451cc331bf?auto=format&fit=crop&w=600&q=80",
-                "https://images.unsplash.com/photo-1532712938310-34cb3982ef74?auto=format&fit=crop&w=600&q=80",
-                "https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=600&q=80",
-                "https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?auto=format&fit=crop&w=600&q=80"
-            ]
-        };
-
-        // DOM Loaded Init
-        document.addEventListener('DOMContentLoaded', () => {
-            renderDynamicContent();
-            initScratchCard();
-            startCountdown();
-            initPetals();
-            initAudioControls();
-        });
-
-        /* ----------------------------------------------------
-         * RENDER DYNAMIC CONTENT FROM CONFIG
-         * ---------------------------------------------------- */
-        function renderDynamicContent() {
-            // Populate simple text keys
-            document.querySelectorAll('[data-key]').forEach(el => {
-                const key = el.getAttribute('data-key');
-                if (WEDDING_DATA[key]) {
-                    el.textContent = WEDDING_DATA[key];
-                }
-            });
-
-            // Images and links
-            const heroImg = document.getElementById('display-hero-img');
-            if (heroImg) heroImg.src = WEDDING_DATA.heroImage;
-
-            const mapsLink = document.getElementById('display-maps-link');
-            if (mapsLink) mapsLink.href = WEDDING_DATA.mapsLink;
-
-            // Render Gallery
-            const galleryGrid = document.getElementById('gallery-grid');
-            if (galleryGrid) {
-                galleryGrid.innerHTML = WEDDING_DATA.galleryPhotos.map((url, i) => `
-                    <div class="overflow-hidden rounded-xl shadow-md border border-gold/30 cursor-pointer aspect-square bg-sand group" onclick="openLightbox('${url}')">
-                        <img src="${url}" alt="Gallery ${i+1}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
-                    </div>
-                `).join('');
-            }
-        }
-
-        /* ----------------------------------------------------
-         * COVER SCREEN TAP TO OPEN
-         * ---------------------------------------------------- */
+        
+        // 1. Open Invitation Cover Screen
         function openInvitation() {
             const cover = document.getElementById('cover-screen');
             const main = document.getElementById('main-content');
-            const audio = document.getElementById('bg-music');
-
-            // Slide out cover screen
-            cover.classList.add('cover-up');
             
-            setTimeout(() => {
-                cover.style.display = 'none';
-                main.classList.remove('opacity-0');
-            }, 800);
+            if (cover) {
+                cover.style.transform = 'translateY(-100%)';
+                cover.style.opacity = '0';
+                setTimeout(() => {
+                    cover.style.display = 'none';
+                }, 1000);
+            }
 
-            // Play background music
-            if (audio) {
-                audio.play().then(() => {
-                    document.getElementById('wave-bars').classList.remove('paused');
+            if (main) {
+                main.style.opacity = '1';
+            }
+
+            // Attempt to autoplay audio on user interaction
+            const bgMusic = document.getElementById('bg-music');
+            if (bgMusic) {
+                bgMusic.play().then(() => {
+                    updateAudioUI(true);
                 }).catch(err => {
-                    console.log('Autoplay blocked by browser:', err);
+                    console.log('Autoplay prevented:', err);
                 });
             }
 
-            // Fire initial confetti
-            confetti({
-                particleCount: 60,
-                spread: 70,
-                origin: { y: 0.6 },
-                colors: ['#D4AF37', '#E8D8CE', '#581825']
-            });
+            // Trigger confetti celebration
+            if (typeof confetti === 'function') {
+                confetti({
+                    particleCount: 80,
+                    spread: 70,
+                    origin: { y: 0.6 }
+                });
+            }
         }
 
-        /* ----------------------------------------------------
-         * AUDIO TOGGLE FUNCTIONALITY
-         * ---------------------------------------------------- */
-        function initAudioControls() {
-            const musicBtn = document.getElementById('music-toggle');
-            const audio = document.getElementById('bg-music');
+        // 2. Music Toggle
+        function updateAudioUI(isPlaying) {
             const waveBars = document.getElementById('wave-bars');
-
-            musicBtn.addEventListener('click', () => {
-                if (audio.paused) {
-                    audio.play();
-                    waveBars.classList.remove('paused');
-                } else {
-                    audio.pause();
-                    waveBars.classList.add('paused');
-                }
-            });
+            const musicIcon = document.getElementById('music-icon');
+            if (isPlaying) {
+                if (waveBars) waveBars.classList.remove('paused');
+                if (musicIcon) musicIcon.className = 'fas fa-pause text-gold text-xs ml-1';
+            } else {
+                if (waveBars) waveBars.classList.add('paused');
+                if (musicIcon) musicIcon.className = 'fas fa-music text-gold text-xs ml-1';
+            }
         }
 
-        /* ----------------------------------------------------
-         * SCRATCH TO REVEAL CANVAS
-         * ---------------------------------------------------- */
+        function toggleMusic() {
+            const bgMusic = document.getElementById('bg-music');
+            if (!bgMusic) return;
+
+            if (bgMusic.paused) {
+                bgMusic.play().then(() => updateAudioUI(true)).catch(() => {});
+            } else {
+                bgMusic.pause();
+                updateAudioUI(false);
+            }
+        }
+
+        // 3. Submit Blessing Handler
+        function submitBlessing(event) {
+            event.preventDefault();
+            const statusBox = document.getElementById('blessing-status');
+            const nameInput = document.getElementById('guest-name');
+            const msgInput = document.getElementById('guest-message');
+
+            if (statusBox) {
+                statusBox.classList.remove('hidden');
+            }
+
+            if (nameInput) nameInput.value = '';
+            if (msgInput) msgInput.value = '';
+
+            if (typeof confetti === 'function') {
+                confetti({
+                    particleCount: 50,
+                    spread: 60,
+                    origin: { y: 0.7 }
+                });
+            }
+        }
+
+        // 4. Scratch Card Canvas Logic
         function initScratchCard() {
             const canvas = document.getElementById('scratch-canvas');
             if (!canvas) return;
             const ctx = canvas.getContext('2d');
-            let isDrawing = false;
-            let revealed = false;
-
-            // Resize canvas to match display box
+            
+            // Set bounds
             const rect = canvas.getBoundingClientRect();
-            canvas.width = rect.width;
-            canvas.height = rect.height;
+            canvas.width = rect.width || 300;
+            canvas.height = rect.height || 182;
 
-            // Fill with Golden Shimmer Surface
+            // Fill with gold gradient pattern
             const grad = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
             grad.addColorStop(0, '#D4AF37');
             grad.addColorStop(0.5, '#FFF3A7');
@@ -667,198 +597,96 @@
             ctx.fillStyle = grad;
             ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-            // Add Text Overlay on scratch layer
+            // Add text overlay on canvas
             ctx.fillStyle = '#581825';
-            ctx.font = 'bold 14px Montserrat';
+            ctx.font = 'bold 14px sans-serif';
             ctx.textAlign = 'center';
-            ctx.fillText('✨ SCRATCH HERE ✨', canvas.width / 2, canvas.height / 2 + 5);
+            ctx.fillText('✨ Scratch to reveal ✨', canvas.width / 2, canvas.height / 2);
 
-            // Scratching logic
+            let isDrawing = false;
+
             function scratch(x, y) {
                 ctx.globalCompositeOperation = 'destination-out';
                 ctx.beginPath();
                 ctx.arc(x, y, 22, 0, Math.PI * 2);
                 ctx.fill();
-
-                checkScratchPercentage();
             }
 
-            function getCoords(e) {
+            function getPos(e) {
                 const b = canvas.getBoundingClientRect();
-                if (e.touches && e.touches[0]) {
-                    return {
-                        x: e.touches[0].clientX - b.left,
-                        y: e.touches[0].clientY - b.top
-                    };
-                }
+                const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+                const clientY = e.touches ? e.touches[0].clientY : e.clientY;
                 return {
-                    x: e.clientX - b.left,
-                    y: e.clientY - b.top
+                    x: clientX - b.left,
+                    y: clientY - b.top
                 };
             }
 
-            canvas.addEventListener('mousedown', (e) => { isDrawing = true; const c = getCoords(e); scratch(c.x, c.y); });
-            canvas.addEventListener('mousemove', (e) => { if (isDrawing) { const c = getCoords(e); scratch(c.x, c.y); } });
-            window.addEventListener('mouseup', () => { isDrawing = false; });
-
-            canvas.addEventListener('touchstart', (e) => { isDrawing = true; const c = getCoords(e); scratch(c.x, c.y); }, { passive: true });
-            canvas.addEventListener('touchmove', (e) => { if (isDrawing) { const c = getCoords(e); scratch(c.x, c.y); } }, { passive: true });
-            window.addEventListener('touchend', () => { isDrawing = false; });
-
-            function checkScratchPercentage() {
-                if (revealed) return;
-                const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-                const pixels = imageData.data;
-                let clearPixels = 0;
-
-                for (let i = 3; i < pixels.length; i += 4) {
-                    if (pixels[i] === 0) clearPixels++;
-                }
-
-                const percentage = (clearPixels / (pixels.length / 4)) * 100;
-                if (percentage > 35) {
-                    revealed = true;
-                    canvas.style.opacity = '0';
-                    setTimeout(() => { canvas.style.pointerEvents = 'none'; }, 700);
-
-                    // Show status text
-                    document.getElementById('scratch-status').classList.remove('opacity-0');
-
-                    // Flower petal / confetti explosion effect
-                    confetti({
-                        particleCount: 100,
-                        spread: 80,
-                        origin: { y: 0.6 },
-                        colors: ['#D4AF37', '#E8D8CE', '#fca5a5', '#581825']
-                    });
-                }
-            }
+            canvas.addEventListener('mousedown', (e) => { isDrawing = true; const p = getPos(e); scratch(p.x, p.y); });
+            canvas.addEventListener('mousemove', (e) => { if (isDrawing) { const p = getPos(e); scratch(p.x, p.y); } });
+            canvas.addEventListener('mouseup', () => isDrawing = false);
+            canvas.addEventListener('touchstart', (e) => { isDrawing = true; const p = getPos(e); scratch(p.x, p.y); }, { passive: true });
+            canvas.addEventListener('touchmove', (e) => { if (isDrawing) { const p = getPos(e); scratch(p.x, p.y); } }, { passive: true });
+            canvas.addEventListener('touchend', () => isDrawing = false);
         }
 
-        /* ----------------------------------------------------
-         * LIVE COUNTDOWN TIMER
-         * ---------------------------------------------------- */
-        function startCountdown() {
-            function updateTimer() {
-                const weddingTimeMs = new Date(WEDDING_DATA.weddingDate + 'T16:30:00').getTime();
-                const now = new Date().getTime();
-                const diff = weddingTimeMs - now;
+        // 5. Populate Gallery Images
+        function initGallery() {
+            const galleryGrid = document.getElementById('gallery-grid');
+            if (!galleryGrid) return;
 
-                if (diff <= 0) {
-                    document.getElementById('timer-days').innerText = '00';
-                    document.getElementById('timer-hours').innerText = '00';
-                    document.getElementById('timer-minutes').innerText = '00';
-                    document.getElementById('timer-seconds').innerText = '00';
-                    return;
-                }
+            const images = [
+                'https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=600&q=80',
+                'https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=600&q=80',
+                'https://images.unsplash.com/photo-1583939003579-730e3918a45a?auto=format&fit=crop&w=600&q=80',
+                'https://images.unsplash.com/photo-1522673607200-164d1b6ce486?auto=format&fit=crop&w=600&q=80',
+                'https://images.unsplash.com/photo-1520854221256-17451cc331bf?auto=format&fit=crop&w=600&q=80',
+                'https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?auto=format&fit=crop&w=600&q=80'
+            ];
+
+            galleryGrid.innerHTML = images.map((url, i) => `
+                <div class="overflow-hidden rounded-xl border border-gold/30 shadow-md h-40 sm:h-52 bg-sand">
+                    <img src="${url}" alt="Gallery photo ${i + 1}" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
+                </div>
+            `).join('');
+        }
+
+        // 6. Countdown Timer Logic
+        function initCountdown() {
+            const targetDate = new Date('2026-12-18T16:30:00').getTime();
+
+            function updateTimer() {
+                const now = new Date().getTime();
+                const diff = targetDate - now;
+
+                if (diff <= 0) return;
 
                 const days = Math.floor(diff / (1000 * 60 * 60 * 24));
                 const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-                const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+                const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                const secs = Math.floor((diff % (1000 * 60)) / 1000);
 
                 document.getElementById('timer-days').innerText = String(days).padStart(2, '0');
                 document.getElementById('timer-hours').innerText = String(hours).padStart(2, '0');
-                document.getElementById('timer-minutes').innerText = String(minutes).padStart(2, '0');
-                document.getElementById('timer-seconds').innerText = String(seconds).padStart(2, '0');
+                document.getElementById('timer-minutes').innerText = String(mins).padStart(2, '0');
+                document.getElementById('timer-seconds').innerText = String(secs).padStart(2, '0');
             }
 
             updateTimer();
             setInterval(updateTimer, 1000);
         }
 
-        /* ----------------------------------------------------
-         * AMBIENT FALLING ROSE PETALS
-         * ---------------------------------------------------- */
-        function initPetals() {
-            const container = document.getElementById('petals-container');
-            const petalCount = 12;
-
-            for (let i = 0; i < petalCount; i++) {
-                const petal = document.createElement('div');
-                petal.classList.add('petal');
-                petal.style.left = Math.random() * 100 + 'vw';
-                petal.style.width = (Math.random() * 12 + 10) + 'px';
-                petal.style.height = (Math.random() * 12 + 10) + 'px';
-                petal.style.animationDuration = (Math.random() * 5 + 8) + 's';
-                petal.style.animationDelay = (Math.random() * 5) + 's';
-                container.appendChild(petal);
-            }
-        }
-
-        /* ----------------------------------------------------
-         * LIGHTBOX MODAL FOR GALLERY
-         * ---------------------------------------------------- */
-        function openLightbox(url) {
-            const modal = document.getElementById('lightbox-modal');
-            const img = document.getElementById('lightbox-img');
-            img.src = url;
-            modal.classList.remove('hidden');
-        }
-
-        function closeLightbox() {
-            document.getElementById('lightbox-modal').classList.add('hidden');
-        }
-
-        /* ----------------------------------------------------
-         * WHATSAPP SHARE
-         * ---------------------------------------------------- */
-        function shareOnWhatsApp() {
-            const message = `✨ You are cordially invited to the wedding of ${WEDDING_DATA.brideName} & ${WEDDING_DATA.groomName}! 🥂\n\n📅 Date: ${WEDDING_DATA.weddingDateFull}\n📍 Venue: ${WEDDING_DATA.venueName}\n\nTap the link to open the invitation:\n${window.location.href}`;
-            const url = `https://api.whatsapp.com/send?text=${encodeURIComponent(message)}`;
-            window.open(url, '_blank');
-        }
-
-        /* ----------------------------------------------------
-         * LIVE EDITING MODAL
-         * ---------------------------------------------------- */
-        function toggleEditModal() {
-            const modal = document.getElementById('edit-modal');
-            if (modal.classList.contains('hidden')) {
-                // Populate current values
-                document.getElementById('input-topQuote').value = WEDDING_DATA.topQuote;
-                document.getElementById('input-brideName').value = WEDDING_DATA.brideName;
-                document.getElementById('input-groomName').value = WEDDING_DATA.groomName;
-                document.getElementById('input-weddingDate').value = WEDDING_DATA.weddingDate;
-                document.getElementById('input-weddingTime').value = WEDDING_DATA.weddingTime;
-                document.getElementById('input-venueName').value = WEDDING_DATA.venueName;
-                document.getElementById('input-venueAddress').value = WEDDING_DATA.venueAddress;
-                document.getElementById('input-mapsLink').value = WEDDING_DATA.mapsLink;
-                document.getElementById('input-heroImage').value = WEDDING_DATA.heroImage;
-
-                modal.classList.remove('hidden');
-            } else {
-                modal.classList.add('hidden');
-            }
-        }
-
-        function saveCustomizations(e) {
-            e.preventDefault();
-            WEDDING_DATA.topQuote = document.getElementById('input-topQuote').value;
-            WEDDING_DATA.brideName = document.getElementById('input-brideName').value;
-            WEDDING_DATA.groomName = document.getElementById('input-groomName').value;
-            WEDDING_DATA.weddingDate = document.getElementById('input-weddingDate').value;
-            WEDDING_DATA.weddingTime = document.getElementById('input-weddingTime').value;
-            WEDDING_DATA.venueName = document.getElementById('input-venueName').value;
-            WEDDING_DATA.venueAddress = document.getElementById('input-venueAddress').value;
-            WEDDING_DATA.mapsLink = document.getElementById('input-mapsLink').value;
-            WEDDING_DATA.heroImage = document.getElementById('input-heroImage').value;
-
-            // Format derived dates
-            if (WEDDING_DATA.weddingDate) {
-                const d = new Date(WEDDING_DATA.weddingDate + 'T00:00:00');
-                const optionsFull = { month: 'long', day: 'numeric', year: 'numeric' };
-                WEDDING_DATA.weddingDateFull = d.toLocaleDateString('en-US', optionsFull);
-                WEDDING_DATA.weddingDateShort = WEDDING_DATA.weddingDateFull.toUpperCase();
-                WEDDING_DATA.weddingDay = d.toLocaleDateString('en-US', { weekday: 'long' });
-            }
-
-            renderDynamicContent();
-            toggleEditModal();
-
-            // Re-init scratch card background with updated date text underneath
+        // On DOM Load Setup
+        window.addEventListener('DOMContentLoaded', () => {
             initScratchCard();
-        }
+            initGallery();
+            initCountdown();
+
+            const musicBtn = document.getElementById('music-toggle');
+            if (musicBtn) {
+                musicBtn.addEventListener('click', toggleMusic);
+            }
+        });
     </script>
 </body>
 </html>
