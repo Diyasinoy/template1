@@ -1,692 +1,866 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Wedding Invitation | Arya & John</title>
-
-    <!-- WhatsApp / Social Media Meta Tags -->
-    <meta property="og:title" content="Arya & John's Wedding Invitation">
-    <meta property="og:description" content="Together with their families, Arya & John invite you to celebrate their wedding. Tap to open the invitation.">
-    <meta property="og:image" content="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1200&q=80">
-    <meta property="og:type" content="website">
-
-    <!-- Fonts -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Julian & Eleanor - Wedding Invitation</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Montserrat:wght@200;300;400;500;600&family=Great+Vibes&display=swap" rel="stylesheet">
-
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-
-    <!-- FontAwesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-    <!-- Canvas Confetti CDN -->
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400;1,600&family=Montserrat:wght@200;300;400;500;600&family=Pinyon+Script&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
-
+    
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        ivory: '#FDFBF7',
-                        sand: '#FAF6EE',
                         gold: {
-                            light: '#F4E0A5',
-                            DEFAULT: '#D4AF37',
-                            dark: '#AA7C11',
-                            metallic: '#B8860B'
+                            100: '#FFF2E2',
+                            200: '#F4D3B0',
+                            300: '#E2B27E',
+                            400: '#C88D4D',
+                            500: '#A66E38',
+                            600: '#855123',
                         },
-                        burgundy: '#581825',
-                        rose: '#E8D8CE',
-                        charcoal: '#2C2A29'
+                        burgundy: {
+                            50: '#FDF3F4',
+                            100: '#FBE4E6',
+                            200: '#F7CBD0',
+                            500: '#A33345',
+                            800: '#58111A',
+                            900: '#380B10'
+                        },
+                        rose: {
+                            100: '#FCE7EE',
+                            300: '#F5B8CC',
+                            500: '#D9779B'
+                        },
+                        cream: '#FAF6F0',
+                        charcoal: '#221C1D'
                     },
                     fontFamily: {
-                        serif: ['Cormorant Garamond', 'serif'],
-                        sans: ['Montserrat', 'sans-serif'],
-                        script: ['Great Vibes', 'cursive']
+                        serif: ['"Cormorant Garamond"', 'serif'],
+                        sans: ['"Montserrat"', 'sans-serif'],
+                        script: ['"Pinyon Script"', 'cursive']
                     }
                 }
             }
         }
     </script>
-
     <style>
-        /* Smooth scrolling */
-        html {
-            scroll-behavior: smooth;
-            -webkit-tap-highlight-color: transparent;
-        }
+        .font-script { font-family: 'Pinyon Script', cursive; }
+        .font-serif { font-family: 'Cormorant Garamond', serif; }
+        .font-sans { font-family: 'Montserrat', sans-serif; }
 
-        /* Golden Metallic Gradient Text */
         .gold-gradient-text {
-            background: linear-gradient(135deg, #BF953F 0%, #FCF6BA 25%, #B38728 50%, #FBF5B7 75%, #AA771C 100%);
+            background: linear-gradient(135deg, #E2B27E 0%, #FFF2E2 25%, #C88D4D 50%, #F4D3B0 75%, #855123 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            background-size: 200% auto;
-            animation: shine 4s linear infinite;
         }
 
-        .gold-border-gradient {
-            border-image: linear-gradient(135deg, #BF953F, #FCF6BA, #B38728, #AA771C) 1;
+        .bg-glass {
+            background: rgba(250, 246, 240, 0.88);
+            backdrop-filter: blur(12px);
         }
 
-        .gold-bg-gradient {
-            background: linear-gradient(135deg, #D4AF37 0%, #FFF3A7 50%, #AA7C11 100%);
+        /* Wax Seal & Envelope Animations */
+        .wax-seal {
+            background: radial-gradient(circle at 30% 30%, #a82035, #58111a);
+            box-shadow: 0 4px 15px rgba(56, 11, 16, 0.4), inset 0 2px 4px rgba(255, 255, 255, 0.3), inset 0 -3px 6px rgba(0, 0, 0, 0.5);
         }
 
-        .gold-btn {
-            background: linear-gradient(135deg, #D4AF37, #AA7C11);
-            transition: all 0.3s ease;
-        }
-        .gold-btn:hover {
-            background: linear-gradient(135deg, #AA7C11, #D4AF37);
-            box-shadow: 0 10px 20px -5px rgba(212, 175, 55, 0.4);
-        }
+        /* ===== Envelope ===== */
+        .env-stage { perspective: 1200px; transition: transform 1s ease 0.9s; }
+        .env-stage.is-open { transform: translateY(8vh); }
 
-        @keyframes shine {
-            to { background-position: 200% center; }
-        }
-
-        /* Floating Audio Wave Animation */
-        .bar {
-            width: 3px;
-            background-color: #D4AF37;
-            animation: pulse 1s ease-in-out infinite alternate;
-        }
-        .bar:nth-child(1) { height: 8px; animation-delay: 0.1s; }
-        .bar:nth-child(2) { height: 16px; animation-delay: 0.3s; }
-        .bar:nth-child(3) { height: 12px; animation-delay: 0.2s; }
-        .bar:nth-child(4) { height: 18px; animation-delay: 0.4s; }
-
-        @keyframes pulse {
-            0% { transform: scaleY(0.3); }
-            100% { transform: scaleY(1.1); }
-        }
-
-        .paused .bar {
-            animation-play-state: paused;
-            height: 4px !important;
-        }
-
-        /* Wax Seal Ripple */
-        .seal-pulse {
-            animation: sealGlow 2s infinite;
-        }
-        @keyframes sealGlow {
-            0% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.6); }
-            70% { box-shadow: 0 0 0 18px rgba(212, 175, 55, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0); }
-        }
-
-        /* Scratch Card Canvas Overlay Styling */
-        #scratch-canvas {
-            touch-action: none;
+        .env {
+            --w: min(90vw, 440px);
+            position: relative;
+            width: var(--w);
+            height: calc(var(--w) * 0.66);
+            font-size: calc(var(--w) / 30);
             cursor: pointer;
+            filter: drop-shadow(0 25px 35px rgba(0, 0, 0, 0.45));
+            -webkit-tap-highlight-color: transparent;
+        }
+        .env:focus-visible { outline: 2px solid #E2B27E; outline-offset: 8px; }
+
+        .env-back {
+            position: absolute; inset: 0;
+            background: #E6D0B8;
+            border-radius: 6px;
         }
 
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar {
-            width: 6px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #FAF6EE;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #D4AF37;
-            border-radius: 3px;
-        }
-
-        /* Envelope / Cover Curtain opening animations */
-        .cover-up {
-            transform: translateY(-100%);
-            transition: transform 1.2s cubic-bezier(0.77, 0, 0.175, 1);
-        }
-        .cover-down {
-            transform: translateY(100%);
-            transition: transform 1.2s cubic-bezier(0.77, 0, 0.175, 1);
-        }
-
-        /* Petal Falling Animation */
-        .petal {
+        /* the invitation card tucked inside */
+        .env-letter {
             position: absolute;
-            background-color: #fca5a5;
-            border-radius: 150% 0 150% 0;
-            opacity: 0.7;
+            left: 6%; right: 6%; top: 6%;
+            height: 100%;
+            z-index: 10;
+            background: #FAF0E6;
+            border: 1px solid rgba(200, 141, 77, 0.45);
+            border-radius: 4px;
+            box-shadow: 0 2px 10px rgba(56, 11, 16, 0.2);
+            padding: 1.6em 1em 0;
+            text-align: center;
+            transition: transform 1.1s cubic-bezier(0.22, 1, 0.36, 1) 0.9s;
+        }
+        .env-letter::before {
+            content: ''; position: absolute; inset: 6px;
+            border: 1px solid rgba(200, 141, 77, 0.35);
+            border-radius: 2px; pointer-events: none;
+        }
+        .env.is-open .env-letter { transform: translateY(-58%); }
+
+        /* front pocket (left / right / bottom folds) */
+        .env-front {
+            position: absolute; inset: 0; z-index: 20;
+            background: linear-gradient(180deg, #F1E1CD 0%, #E9D5BD 100%);
+            clip-path: polygon(0 0, 50% 56%, 100% 0, 100% 100%, 0 100%);
+            border-radius: 6px;
             pointer-events: none;
-            animation: animate-petal 10s linear infinite;
         }
-        @keyframes animate-petal {
-            0% {
-                opacity: 0.8;
-                top: -10%;
-                transform: translateX(0) rotate(0deg);
-            }
-            100% {
-                opacity: 0;
-                top: 100%;
-                transform: translateX(100px) rotate(360deg);
-            }
+
+        /* top flap */
+        .env-flap {
+            position: absolute; left: 0; top: 0;
+            width: 100%; height: 56%;
+            z-index: 30;
+            background: linear-gradient(180deg, #DEC3A6 0%, #E8D2BA 100%);
+            clip-path: polygon(0 0, 50% 100%, 100% 0);
+            transform-origin: top center;
+            transition: transform 0.9s cubic-bezier(0.4, 0, 0.2, 1) 0.2s, z-index 0s linear 0.55s;
+            pointer-events: none;
         }
+        .env.is-open .env-flap { transform: rotateX(180deg); z-index: 5; }
+
+        /* wax seal (decorative, not a button) */
+        .env-seal {
+            position: absolute; left: 50%; top: 56%;
+            width: 4.6em; height: 4.6em;
+            transform: translate(-50%, -50%);
+            z-index: 40;
+            border-radius: 9999px;
+            background: radial-gradient(circle at 30% 30%, #b3253b, #58111a);
+            box-shadow: 0 4px 12px rgba(56, 11, 16, 0.5), inset 0 2px 4px rgba(255,255,255,0.3), inset 0 -3px 6px rgba(0,0,0,0.5);
+            border: 2px solid rgba(226, 178, 126, 0.6);
+            display: flex; align-items: center; justify-content: center;
+            color: #F4D3B0;
+            font-family: 'Pinyon Script', cursive;
+            font-size: 1.7em; line-height: 1;
+            transition: opacity 0.35s ease, transform 0.35s ease;
+            pointer-events: none;
+        }
+        .env.is-open .env-seal { opacity: 0; transform: translate(-50%, -50%) scale(0.6); }
+
+        .env-hint { transition: opacity 0.4s ease; }
+        .env-hint.is-hidden { opacity: 0; }
+
+        .env-stage:not(.is-open) .env:hover { transform: translateY(-3px); }
+        .env { transition: transform 0.3s ease; }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-8px) rotate(1deg); }
+        }
+
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .modal-active {
+            overflow: hidden;
+        }
+
+        /* ===== Elegant polish ===== */
+        .reveal{opacity:0;transform:translateY(18px);transition:opacity 1.4s ease,transform 1.4s ease}
+        .reveal.in{opacity:1;transform:none}
+        #dust{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+        .hero-in{opacity:0;transform:translateY(24px)}
+        .hero-ready .hero-in{animation:heroIn 1.6s cubic-bezier(.22,1,.36,1) forwards;animation-delay:var(--d,0s)}
+        @keyframes heroIn{to{opacity:1;transform:none}}
+        section:first-of-type{animation:kenburns 40s ease-in-out infinite alternate}
+        @keyframes kenburns{from{background-size:112%}to{background-size:128%}}
+        section:first-of-type::before{content:'';position:absolute;inset:22px;border:1px solid rgba(226,178,126,.55);pointer-events:none;z-index:4}
+        section:first-of-type::after{content:'';position:absolute;inset:30px;border:1px solid rgba(226,178,126,.25);pointer-events:none;z-index:4}
+        .shimmer{background-size:300% 100%;animation:shimmer 7s linear infinite}
+        @keyframes shimmer{to{background-position:-300% 0}}
+        .orn{display:flex;align-items:center;justify-content:center;gap:.6rem;margin:1rem auto;width:9rem}
+        .orn i{flex:1;height:1px;background:linear-gradient(90deg,transparent,#C88D4D)}
+        .orn i:last-child{background:linear-gradient(270deg,transparent,#C88D4D)}
+        .orn b{width:7px;height:7px;background:#C88D4D;transform:rotate(45deg)}
+        .env-seal::after{content:'';position:absolute;inset:-6px;border-radius:50%;border:2px solid rgba(226,178,126,.6);animation:ring 2s infinite}
+        @keyframes ring{0%{transform:scale(.9);opacity:.9}100%{transform:scale(1.6);opacity:0}}
+        .env.is-open .env-letter{box-shadow:0 0 40px rgba(244,211,176,.55)}
+        .lb-arrow{position:absolute;top:50%;transform:translateY(-50%);color:#fff;font-size:3rem;padding:0 1rem;opacity:.7}
+        .lb-arrow:hover{opacity:1}
+        /* gentle to-and-fro sway: drift + slight tilt + soft arc */
+        @keyframes swayX{from{translate:-10px 0}to{translate:10px 0}}
+        @keyframes swayR{from{rotate:-.6deg}to{rotate:.6deg}}
+        @keyframes swayY{0%,100%{transform:translateY(-4px)}50%{transform:translateY(3px)}}
+        .floaty{animation:swayX var(--fdur,4.5s) ease-in-out infinite alternate,swayR var(--fdur,4.5s) ease-in-out infinite alternate,swayY var(--fdur,4.5s) ease-in-out infinite alternate;animation-delay:var(--fd,0s);will-change:transform,translate,rotate}
+        html,body{overflow-x:clip}
+        @media (prefers-reduced-motion:reduce){.floaty{animation:none}}
     </style>
 </head>
-<body class="bg-ivory text-charcoal font-sans antialiased overflow-x-hidden selection:bg-gold-light selection:text-burgundy">
+<body class="bg-cream text-charcoal font-sans antialiased selection:bg-rose-100 selection:text-burgundy-900">
 
-    <!-- PETALS ANIMATION CONTAINER -->
-    <div id="petals-container" class="fixed inset-0 pointer-events-none z-10 overflow-hidden"></div>
+    <div id="envelopeOverlay" class="fixed inset-0 z-50 flex flex-col items-center justify-center bg-burgundy-900 px-4 transition-opacity duration-1000 overflow-hidden">
+        <div id="envStage" class="env-stage">
+            <div id="envelope" class="env" role="button" tabindex="0" aria-label="Open the wedding invitation" onclick="openEnvelope()" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openEnvelope();}">
+                <div class="env-back"></div>
 
-    <!-- AUDIO ELEMENT -->
-    <audio id="bg-music" loop preload="auto">
-        <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=cinematic-romantic-wedding-113527.mp3" type="audio/mpeg">
-        Your browser does not support the audio element.
-    </audio>
-
-    <!-- FLOATING MUSIC TOGGLE BUTTON -->
-    <button id="music-toggle" class="fixed top-5 right-5 z-40 bg-white/80 backdrop-blur-md border border-gold/40 p-3 rounded-full shadow-lg flex items-center justify-center gap-1.5 transition-transform active:scale-95" aria-label="Toggle Music">
-        <div class="flex items-center gap-0.5 h-5 px-1 paused" id="wave-bars">
-            <span class="bar rounded-full"></span>
-            <span class="bar rounded-full"></span>
-            <span class="bar rounded-full"></span>
-            <span class="bar rounded-full"></span>
-        </div>
-        <i id="music-icon" class="fas fa-music text-gold text-xs ml-1"></i>
-    </button>
-
-    <!-- ========================================== -->
-    <!-- 1. CINEMATIC COVER SCREEN (TAP TO OPEN)   -->
-    <!-- ========================================== -->
-    <div id="cover-screen" class="fixed inset-0 z-50 flex flex-col justify-between items-center bg-sand text-center px-6 py-12 transition-all duration-1000">
-        <!-- Top Ornamental Frame -->
-        <div class="pt-6">
-            <div class="text-gold text-sm tracking-[0.3em] uppercase font-sans mb-2 opacity-80">Wedding Invitation</div>
-            <div class="w-16 h-[1px] bg-gold mx-auto my-3"></div>
-            <p class="font-script text-2xl text-burgundy">Save Our Date</p>
-        </div>
-
-        <!-- Center Seal & Invitation Preview -->
-        <div class="my-auto flex flex-col items-center max-w-sm w-full">
-            <div class="relative mb-8 cursor-pointer group" onclick="openInvitation()">
-                <div class="w-28 h-28 rounded-full bg-gradient-to-br from-gold via-gold-light to-gold-dark p-1 shadow-2xl seal-pulse flex items-center justify-center">
-                    <div class="w-full h-full rounded-full bg-burgundy flex flex-col items-center justify-center text-gold border border-gold/40 group-hover:scale-105 transition-transform duration-300">
-                        <i class="fas fa-heart text-gold text-xl mb-1 animate-bounce"></i>
-                        <span class="font-serif italic text-xs tracking-widest uppercase">Open</span>
-                    </div>
+                <!-- Invitation card that slides out -->
+                <div class="env-letter">
+                    <span class="block uppercase text-burgundy-500 font-medium" style="font-size:0.62em; letter-spacing:0.3em; line-height:1.8;">You are cordially invited to the wedding of</span>
+                    <h1 class="font-serif text-burgundy-900 tracking-wide" style="font-size:2.3em; line-height:1.05; margin-top:0.4em;">
+                        Julian <span class="font-script text-gold-400" style="font-size:1.1em;">&amp;</span> Eleanor
+                    </h1>
+                    <p class="font-serif italic text-burgundy-800/80" style="font-size:1.05em; margin-top:0.5em;">September 18, 2027 • Boston, MA</p>
                 </div>
+
+                <div class="env-front"></div>
+                <div class="env-flap"></div>
+                <div class="env-seal">J&amp;E</div>
             </div>
-
-            <h1 class="font-serif text-3xl sm:text-4xl text-burgundy font-light tracking-wide mb-2">
-                <span data-key="brideName">Jane</span> 
-                <span class="font-script text-gold text-2xl sm:text-3xl">&amp;</span> 
-                <span data-key="groomName">Daniel</span>
-            </h1>
-            <p class="text-xs uppercase tracking-[0.2em] text-charcoal/70 mt-1" data-key="weddingDateShort">DECEMBER 18, 2026</p>
         </div>
 
-        <!-- Bottom Tap Prompt -->
-        <div class="pb-4 animate-pulse">
-            <button onclick="openInvitation()" class="inline-flex items-center gap-2 px-6 py-2.5 rounded-full border border-gold/40 bg-white/50 backdrop-blur-sm text-xs font-medium tracking-widest text-burgundy uppercase shadow-sm">
-                <span>Tap To Reveal Invitation</span>
-                <i class="fas fa-chevron-right text-gold text-xs"></i>
-            </button>
-        </div>
+        <span id="envHint" class="env-hint absolute bottom-[12%] text-[10px] uppercase tracking-[0.3em] text-gold-200/70 font-medium animate-pulse">Tap the envelope to open</span>
     </div>
 
+    <!-- Audio Element (Ambient Music Sample) -->
+    <audio id="weddingMusic" loop preload="auto">
+        <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=piano-moment-112347.mp3" type="audio/mpeg">
+    </audio>
 
-    <!-- ========================================== -->
-    <!-- MAIN INVITATION CONTENT                    -->
-    <!-- ========================================== -->
-    <main id="main-content" class="relative min-h-screen opacity-0 transition-opacity duration-1000">
+    <button id="musicToggle" onclick="toggleAudio()" class="fixed bottom-6 right-6 z-40 bg-burgundy-800 text-gold-200 p-3.5 rounded-full shadow-2xl border border-gold-300 hover:scale-110 transition-all duration-300 flex items-center justify-center group" aria-label="Toggle Music">
+        <i id="musicIcon" class="fas fa-music text-lg group-hover:rotate-12 transition-transform"></i>
+        <span class="max-w-0 overflow-hidden whitespace-nowrap group-hover:max-w-xs transition-all duration-500 ease-in-out text-xs font-medium pl-0 group-hover:pl-2 text-cream">Play Music</span>
+    </button>
 
-        <!-- HERO / COUPLE HEADER SECTION -->
-        <section class="min-h-screen flex flex-col justify-between items-center text-center px-4 py-16 relative bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-sand via-ivory to-rose/20">
-            <!-- Decorative Corners -->
-            <div class="absolute top-4 left-4 w-12 h-12 border-t-2 border-l-2 border-gold/40 pointer-events-none"></div>
-            <div class="absolute top-4 right-4 w-12 h-12 border-t-2 border-r-2 border-gold/40 pointer-events-none"></div>
-            <div class="absolute bottom-4 left-4 w-12 h-12 border-b-2 border-l-2 border-gold/40 pointer-events-none"></div>
-            <div class="absolute bottom-4 right-4 w-12 h-12 border-b-2 border-r-2 border-gold/40 pointer-events-none"></div>
-
-            <div class="pt-8 max-w-lg mx-auto">
-                <div class="w-16 h-[1.5px] bg-gold mx-auto mb-5"></div>
-                <p class="text-sm sm:text-base tracking-[0.3em] uppercase text-gold-dark font-semibold mb-3">Together With Their Families</p>
-                <p class="font-serif italic text-lg sm:text-xl text-charcoal/80">Invite you to celebrate their wedding day</p>
-            </div>
-
-            <div class="my-auto py-8">
-                <div class="relative inline-block mb-4">
-                    <!-- Elegant Frame around portrait photo -->
-                    <div class="w-48 h-64 sm:w-56 sm:h-72 rounded-t-full p-1.5 border-2 border-gold/50 shadow-xl mx-auto overflow-hidden bg-white">
-                        <img id="display-hero-img" src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?auto=format&fit=crop&w=800&q=80" alt="Couple Portrait" class="w-full h-full object-cover rounded-t-full">
-                    </div>
-                </div>
-
-                <h1 class="font-serif text-4xl sm:text-6xl text-burgundy font-normal tracking-wide my-4 gold-gradient-text">
-                    <span data-key="brideName">Arya</span>
-                    <span class="block font-script text-3xl sm:text-4xl text-gold my-1">&amp;</span>
-                    <span data-key="groomName">John Doe</span>
-                </h1>
-
-                <p class="font-serif italic text-charcoal/70 text-base max-w-md mx-auto px-6 mt-3" data-key="heroSubtext">
-                    "Two lives, two hearts, joined together in friendship, united forever in love."
-                </p>
-            </div>
-
-            <!-- Scroll Indicator -->
-            <div class="pb-4 flex flex-col items-center gap-2">
-                <span class="text-[10px] tracking-[0.25em] uppercase text-gold-dark">Scroll Down</span>
-                <div class="w-5 h-9 rounded-full border border-gold/60 flex items-start justify-center p-1">
-                    <div class="w-1 h-2 bg-gold rounded-full animate-bounce"></div>
-                </div>
-            </div>
-        </section>
-
-
-        <!-- EMOTIONAL INVITATION MESSAGE SECTION -->
-        <section class="py-20 px-6 bg-white text-center relative">
-            <div class="max-w-xl mx-auto space-y-6">
-                <div class="text-gold text-2xl"><i class="fas fa-quote-left"></i></div>
-                <h2 class="font-serif text-2xl sm:text-3xl text-burgundy italic leading-relaxed" data-key="blessingQuote">
-                    "Love is patient, love is kind. It always protects, always trusts, always hopes, always perseveres."
-                </h2>
-                <p class="text-sm leading-relaxed text-charcoal/80 font-light px-4" data-key="invitationText">
-                    As we begin this beautiful new chapter of our lives, your presence, blessings, and love would mean the world to us. Please join us in celebrating our marriage ceremony and reception.
-                </p>
-                <div class="w-16 h-[1px] bg-gold/50 mx-auto pt-2"></div>
-                <p class="font-script text-2xl text-gold-dark" data-key="familyBlessing">With the blessings of Parents &amp; Grandparents</p>
-            </div>
-        </section>
-
-
-        <!-- SCRATCH TO REVEAL DATE SECTION -->
-        <section class="py-20 px-4 bg-sand text-center relative overflow-hidden">
-            <div class="max-w-md mx-auto">
-                <span class="text-xs uppercase tracking-[0.3em] text-gold-dark font-medium">Interactive Reveal</span>
-                <h2 class="font-serif text-3xl text-burgundy mt-1 mb-3">Scratch To Reveal The Date</h2>
-                <p class="text-xs text-charcoal/60 mb-8">Use your finger or cursor to scratch off the gold layer below!</p>
-
-                <!-- Scratch Box Container -->
-                <div class="relative w-full max-w-xs h-48 mx-auto rounded-2xl shadow-xl overflow-hidden border-2 border-gold/40 bg-white">
-                    
-                    <!-- Underneath Revealed Content -->
-                    <div class="absolute inset-0 flex flex-col items-center justify-center p-4 bg-gradient-to-br from-ivory via-white to-rose/30">
-                        <div class="text-gold text-xs uppercase tracking-widest font-semibold mb-1">Save The Date</div>
-                        <div class="font-serif text-2xl sm:text-3xl text-burgundy font-bold my-1" data-key="weddingDateFull">
-                            December 18, 2026
-                        </div>
-                        <div class="text-sm text-charcoal/80 font-medium my-1" data-key="weddingTime">
-                            4:30 PM Onwards
-                        </div>
-                        <div class="mt-2 inline-flex items-center gap-1.5 px-3 py-1 bg-gold/10 text-gold-dark rounded-full text-xs font-medium">
-                            <i class="fas fa-calendar-check"></i>
-                            <span data-key="weddingDay">Friday</span>
-                        </div>
-                    </div>
-
-                    <!-- Scratch Overlay Canvas -->
-                    <canvas id="scratch-canvas" class="absolute inset-0 w-full h-full z-10 transition-opacity duration-700"></canvas>
-                </div>
-
-                <!-- Status Message after reveal -->
-                <div id="scratch-status" class="mt-4 text-xs font-medium text-gold-dark opacity-0 transition-opacity duration-500">
-                    ✨ Date Revealed! We can't wait to see you! ✨
-                </div>
-            </div>
-        </section>
-
-
-        <!-- LIVE COUNTDOWN TIMER SECTION -->
-        <section class="py-20 px-4 bg-burgundy text-white text-center relative">
-            <div class="max-w-xl mx-auto">
-                <p class="text-xs tracking-[0.3em] uppercase text-gold-light mb-2">Counting Down To The Big Day</p>
-                <h2 class="font-serif text-3xl sm:text-4xl text-gold font-light mb-10">Days Until We Say "I Do"</h2>
-
-                <!-- Countdown Grid -->
-                <div class="grid grid-cols-4 gap-2 sm:gap-4 max-w-md mx-auto">
-                    <div class="bg-white/10 backdrop-blur-md rounded-xl p-3 border border-gold/30">
-                        <span id="timer-days" class="font-serif text-2xl sm:text-4xl text-gold font-bold block">00</span>
-                        <span class="text-[10px] uppercase tracking-wider text-sand">Days</span>
-                    </div>
-                    <div class="bg-white/10 backdrop-blur-md rounded-xl p-3 border border-gold/30">
-                        <span id="timer-hours" class="font-serif text-2xl sm:text-4xl text-gold font-bold block">00</span>
-                        <span class="text-[10px] uppercase tracking-wider text-sand">Hours</span>
-                    </div>
-                    <div class="bg-white/10 backdrop-blur-md rounded-xl p-3 border border-gold/30">
-                        <span id="timer-minutes" class="font-serif text-2xl sm:text-4xl text-gold font-bold block">00</span>
-                        <span class="text-[10px] uppercase tracking-wider text-sand">Mins</span>
-                    </div>
-                    <div class="bg-white/10 backdrop-blur-md rounded-xl p-3 border border-gold/30">
-                        <span id="timer-seconds" class="font-serif text-2xl sm:text-4xl text-gold font-bold block">00</span>
-                        <span class="text-[10px] uppercase tracking-wider text-sand">Secs</span>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-
-        <!-- GALLERY SECTION -->
-        <section class="py-20 px-4 bg-ivory text-center">
-            <div class="max-w-4xl mx-auto">
-                <span class="text-xs uppercase tracking-[0.3em] text-gold-dark font-medium">Captured Moments</span>
-                <h2 class="font-serif text-3xl sm:text-4xl text-burgundy mt-1 mb-10">Our Love Story Gallery</h2>
-
-                <!-- Gallery Grid -->
-                <div id="gallery-grid" class="grid grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4">
-                    <!-- Dynamically populated from JS -->
-                </div>
-            </div>
-        </section>
-
-
-        <!-- VENUE & LOCATION SECTION -->
-        <section class="py-20 px-4 bg-sand text-center">
-            <div class="max-w-xl mx-auto">
-                <span class="text-xs uppercase tracking-[0.3em] text-gold-dark font-medium">Where &amp; When</span>
-                <h2 class="font-serif text-3xl sm:text-4xl text-burgundy mt-1 mb-8">Wedding Venue</h2>
-
-                <!-- Venue Details Card -->
-                <div class="bg-white rounded-2xl p-6 sm:p-8 shadow-xl border border-gold/30 text-center relative">
-                    <div class="w-12 h-12 rounded-full bg-sand text-gold-dark flex items-center justify-center mx-auto mb-4 text-xl">
-                        <i class="fas fa-location-dot"></i>
-                    </div>
-
-                    <h3 id="display-venue-name" class="font-serif text-2xl text-burgundy font-semibold mb-2" data-key="venueName">
-                        The Grand Palace Hotel &amp; Resort
-                    </h3>
-                    
-                    <p class="text-sm text-charcoal/80 mb-4" data-key="venueAddress">
-                        123 Royal Boulevard, Beverly Hills, CA 90210
-                    </p>
-
-                    <div class="py-3 border-t border-b border-sand my-4 flex justify-around text-xs text-charcoal/70">
-                        <div>
-                            <span class="block text-gold-dark font-semibold uppercase">Ceremony</span>
-                            <span data-key="ceremonyTime">4:30 PM</span>
-                        </div>
-                        <div class="w-[1px] bg-sand"></div>
-                        <div>
-                            <span class="block text-gold-dark font-semibold uppercase">Dinner &amp; Party</span>
-                            <span data-key="receptionTime">7:00 PM</span>
-                        </div>
-                    </div>
-
-                    <a id="display-maps-link" href="https://maps.google.com" target="_blank" rel="noopener noreferrer" class="gold-btn inline-flex items-center gap-2 px-6 py-3 rounded-full text-white font-medium text-xs tracking-widest uppercase shadow-md hover:shadow-lg mt-2">
-                        <i class="fas fa-map-marked-alt text-sm"></i>
-                        <span>Open In Google Maps</span>
-                    </a>
-                </div>
-            </div>
-        </section>
-
-
-        <!-- BLESSINGS & GUESTBOOK SECTION -->
-        <section class="py-20 px-4 bg-ivory text-center relative">
-            <div class="max-w-xl mx-auto">
-                <span class="text-xs uppercase tracking-[0.3em] text-gold-dark font-medium">Show Your Love</span>
-                <h2 class="font-serif text-3xl sm:text-4xl text-burgundy mt-1 mb-4">Send Blessings &amp; Wishes</h2>
-                <p class="text-xs text-charcoal/70 max-w-md mx-auto mb-8 font-light">
-                    Your warm wishes and blessings will fill our special day with happiness and cherished memories.
-                </p>
-
-                <!-- Message Box Form -->
-                <div class="bg-white rounded-2xl p-6 shadow-xl border border-gold/30 text-left">
-                    <form onsubmit="submitBlessing(event)" class="space-y-4 text-xs">
-                        <div>
-                            <label class="block text-charcoal/80 font-medium mb-1">Your Name</label>
-                            <input id="guest-name" type="text" required placeholder="e.g. John & Sarah Smith" class="w-full p-3 border border-gold/30 rounded-xl focus:outline-none focus:border-gold text-sm bg-sand/30">
-                        </div>
-                        <div>
-                            <label class="block text-charcoal/80 font-medium mb-1">Your Blessing or Message</label>
-                            <textarea id="guest-message" rows="3" required placeholder="May your joining bring you more joy than you can imagine..." class="w-full p-3 border border-gold/30 rounded-xl focus:outline-none focus:border-gold text-sm bg-sand/30"></textarea>
-                        </div>
-                        <button type="submit" class="w-full gold-btn py-3 rounded-xl text-white font-medium uppercase tracking-wider text-xs shadow-md">
-                            <i class="fas fa-paper-plane mr-2"></i> Send Blessings
-                        </button>
-                    </form>
-
-                    <!-- Success Alert Message -->
-                    <div id="blessing-status" class="hidden mt-4 p-3 bg-emerald-50 text-emerald-800 border border-emerald-200 rounded-xl text-xs text-center font-medium">
-                        ✨ Thank you! Your beautiful blessing has been sent to the couple! ✨
-                    </div>
-                </div>
-            </div>
-        </section>
-
-
-        <!-- UNIFIED GREETINGS SECTION (DARK BACKGROUND) -->
-        <section class="py-20 px-6 bg-burgundy text-sand text-center relative border-t border-gold/30">
-            <div class="max-w-2xl mx-auto">
-                <div class="w-12 h-12 rounded-full bg-gold/20 text-gold flex items-center justify-center mx-auto mb-4 text-lg border border-gold/40">
-                    <i class="fas fa-hands-praying"></i>
-                </div>
-                <span class="text-xs uppercase tracking-[0.3em] text-gold font-medium">With Warm Regards</span>
-                <h2 class="font-serif text-3xl sm:text-4xl text-gold-light mt-1 mb-8">Greetings &amp; Best Wishes</h2>
-
-                <!-- Single Unified Greeting Card -->
-                <div class="bg-black/20 backdrop-blur-md p-8 sm:p-10 rounded-2xl border border-gold/30 shadow-2xl relative overflow-hidden">
-                    <!-- Subtle Background Accent Glow -->
-                    <div class="absolute -top-10 -left-10 w-32 h-32 bg-gold/10 rounded-full blur-2xl pointer-events-none"></div>
-                    <div class="absolute -bottom-10 -right-10 w-32 h-32 bg-gold/10 rounded-full blur-2xl pointer-events-none"></div>
-
-                    <h3 class="font-serif text-2xl sm:text-3xl text-gold font-normal mb-3">From Both Families</h3>
-                    <p class="text-xs sm:text-sm text-sand/90 leading-relaxed font-light italic max-w-lg mx-auto">
-                        "With thankful hearts and overflowing joy, we invite you to join us in celebrating this union. Together as two families becoming one, we look forward to sharing this momentous day with our dearest relatives and friends."
-                    </p>
-                    
-                    <div class="w-16 h-[1px] bg-gold/50 mx-auto my-6"></div>
-                    
-                    <p class="font-script text-2xl sm:text-3xl text-gold-light">
-                        The Families of <span data-key="brideName">Jane</span> &amp; <span data-key="groomName">Daniel</span>
-                    </p>
-                </div>
-            </div>
-        </section>
-
-
-        <!-- FOOTER -->
-        <footer class="py-12 bg-ivory text-charcoal text-center text-xs border-t border-gold/30">
-            <p class="font-serif text-lg text-gold-dark font-semibold mb-2" data-key="brideName">Jane &amp; Daniel</p>
-            <p class="text-charcoal/70 font-light">With love and gratitude. We look forward to celebrating with you!</p>
-        </footer>
-
-    </main>
-
-    <!-- JavaScript Functions & Interactive Controllers -->
-    <script>
+    <section class="relative min-h-screen flex items-center justify-center pt-24 pb-16 px-4 bg-cover bg-center overflow-hidden" style="background-image: linear-gradient(rgba(56, 11, 16, 0.65), rgba(56, 11, 16, 0.7)), url('https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1920&q=80');">
         
-        // 1. Open Invitation Cover Screen
-        function openInvitation() {
-            const cover = document.getElementById('cover-screen');
-            const main = document.getElementById('main-content');
+        <div class="hidden"></div>
+
+        <div class="text-center text-white max-w-3xl mx-auto z-10 px-4">
+            <span class="text-xs md:text-sm font-sans tracking-[0.3em] uppercase block mb-4 text-gold-200/90 font-light">Together with their families</span>
             
-            if (cover) {
-                cover.style.transform = 'translateY(-100%)';
-                cover.style.opacity = '0';
-                setTimeout(() => {
-                    cover.style.display = 'none';
-                }, 1000);
-            }
-
-            if (main) {
-                main.style.opacity = '1';
-            }
-
-            // Attempt to autoplay audio on user interaction
-            const bgMusic = document.getElementById('bg-music');
-            if (bgMusic) {
-                bgMusic.play().then(() => {
-                    updateAudioUI(true);
-                }).catch(err => {
-                    console.log('Autoplay prevented:', err);
-                });
-            }
-
-            // Trigger confetti celebration
-            if (typeof confetti === 'function') {
-                confetti({
-                    particleCount: 80,
-                    spread: 70,
-                    origin: { y: 0.6 }
-                });
-            }
-        }
-
-        // 2. Music Toggle
-        function updateAudioUI(isPlaying) {
-            const waveBars = document.getElementById('wave-bars');
-            const musicIcon = document.getElementById('music-icon');
-            if (isPlaying) {
-                if (waveBars) waveBars.classList.remove('paused');
-                if (musicIcon) musicIcon.className = 'fas fa-pause text-gold text-xs ml-1';
-            } else {
-                if (waveBars) waveBars.classList.add('paused');
-                if (musicIcon) musicIcon.className = 'fas fa-music text-gold text-xs ml-1';
-            }
-        }
-
-        function toggleMusic() {
-            const bgMusic = document.getElementById('bg-music');
-            if (!bgMusic) return;
-
-            if (bgMusic.paused) {
-                bgMusic.play().then(() => updateAudioUI(true)).catch(() => {});
-            } else {
-                bgMusic.pause();
-                updateAudioUI(false);
-            }
-        }
-
-        // 3. Submit Blessing Handler
-        function submitBlessing(event) {
-            event.preventDefault();
-            const statusBox = document.getElementById('blessing-status');
-            const nameInput = document.getElementById('guest-name');
-            const msgInput = document.getElementById('guest-message');
-
-            if (statusBox) {
-                statusBox.classList.remove('hidden');
-            }
-
-            if (nameInput) nameInput.value = '';
-            if (msgInput) msgInput.value = '';
-
-            if (typeof confetti === 'function') {
-                confetti({
-                    particleCount: 50,
-                    spread: 60,
-                    origin: { y: 0.7 }
-                });
-            }
-        }
-
-        // 4. Scratch Card Canvas Logic
-        function initScratchCard() {
-            const canvas = document.getElementById('scratch-canvas');
-            if (!canvas) return;
-            const ctx = canvas.getContext('2d');
+            <h1 class="font-serif text-5xl md:text-7xl lg:text-8xl font-normal tracking-wide my-2 drop-shadow-md">
+                Julian <span class="font-script text-6xl md:text-8xl lg:text-9xl gold-gradient-text shimmer block md:inline my-1 md:my-0">&</span> Eleanor
+            </h1>
             
-            // Set bounds
-            const rect = canvas.getBoundingClientRect();
-            canvas.width = rect.width || 300;
-            canvas.height = rect.height || 182;
+            <div class="w-24 h-[1px] bg-gold-300/80 mx-auto my-6"></div>
+            
+            <p class="font-sans text-sm md:text-base tracking-[0.25em] uppercase text-cream/90 font-light mb-8">
+                Are getting married
+            </p>
 
-            // Fill with gold gradient pattern
-            const grad = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
-            grad.addColorStop(0, '#D4AF37');
-            grad.addColorStop(0.5, '#FFF3A7');
-            grad.addColorStop(1, '#AA7C11');
-            ctx.fillStyle = grad;
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            <p class="font-serif italic text-2xl md:text-3xl text-gold-100 mb-10">
+                Saturday, September 18, 2027
+            </p>
 
-            // Add text overlay on canvas
-            ctx.fillStyle = '#581825';
-            ctx.font = 'bold 14px sans-serif';
-            ctx.textAlign = 'center';
-            ctx.fillText('✨ Scratch to reveal ✨', canvas.width / 2, canvas.height / 2);
-
-            let isDrawing = false;
-
-            function scratch(x, y) {
-                ctx.globalCompositeOperation = 'destination-out';
-                ctx.beginPath();
-                ctx.arc(x, y, 22, 0, Math.PI * 2);
-                ctx.fill();
-            }
-
-            function getPos(e) {
-                const b = canvas.getBoundingClientRect();
-                const clientX = e.touches ? e.touches[0].clientX : e.clientX;
-                const clientY = e.touches ? e.touches[0].clientY : e.clientY;
-                return {
-                    x: clientX - b.left,
-                    y: clientY - b.top
-                };
-            }
-
-            canvas.addEventListener('mousedown', (e) => { isDrawing = true; const p = getPos(e); scratch(p.x, p.y); });
-            canvas.addEventListener('mousemove', (e) => { if (isDrawing) { const p = getPos(e); scratch(p.x, p.y); } });
-            canvas.addEventListener('mouseup', () => isDrawing = false);
-            canvas.addEventListener('touchstart', (e) => { isDrawing = true; const p = getPos(e); scratch(p.x, p.y); }, { passive: true });
-            canvas.addEventListener('touchmove', (e) => { if (isDrawing) { const p = getPos(e); scratch(p.x, p.y); } }, { passive: true });
-            canvas.addEventListener('touchend', () => isDrawing = false);
-        }
-
-        // 5. Populate Gallery Images
-        function initGallery() {
-            const galleryGrid = document.getElementById('gallery-grid');
-            if (!galleryGrid) return;
-
-            const images = [
-                'https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=600&q=80',
-                'https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=600&q=80',
-                'https://images.unsplash.com/photo-1583939003579-730e3918a45a?auto=format&fit=crop&w=600&q=80',
-                'https://images.unsplash.com/photo-1522673607200-164d1b6ce486?auto=format&fit=crop&w=600&q=80',
-                'https://images.unsplash.com/photo-1520854221256-17451cc331bf?auto=format&fit=crop&w=600&q=80',
-                'https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?auto=format&fit=crop&w=600&q=80'
-            ];
-
-            galleryGrid.innerHTML = images.map((url, i) => `
-                <div class="overflow-hidden rounded-xl border border-gold/30 shadow-md h-40 sm:h-52 bg-sand">
-                    <img src="${url}" alt="Gallery photo ${i + 1}" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
+            <!-- Countdown Timer -->
+            <div id="countdown" class="grid grid-cols-4 gap-2 md:gap-4 max-w-md mx-auto bg-burgundy-900/70 backdrop-blur-md p-4 rounded-lg border border-gold-300/30">
+                <div class="flex flex-col items-center">
+                    <span id="days" class="font-serif text-2xl md:text-4xl text-gold-200 font-semibold">00</span>
+                    <span class="text-[9px] md:text-xs uppercase tracking-widest text-cream/70 font-sans mt-1">Days</span>
                 </div>
-            `).join('');
+                <div class="flex flex-col items-center border-l border-gold-300/20">
+                    <span id="hours" class="font-serif text-2xl md:text-4xl text-gold-200 font-semibold">00</span>
+                    <span class="text-[9px] md:text-xs uppercase tracking-widest text-cream/70 font-sans mt-1">Hours</span>
+                </div>
+                <div class="flex flex-col items-center border-l border-gold-300/20">
+                    <span id="minutes" class="font-serif text-2xl md:text-4xl text-gold-200 font-semibold">00</span>
+                    <span class="text-[9px] md:text-xs uppercase tracking-widest text-cream/70 font-sans mt-1">Mins</span>
+                </div>
+                <div class="flex flex-col items-center border-l border-gold-300/20">
+                    <span id="seconds" class="font-serif text-2xl md:text-4xl text-gold-200 font-semibold">00</span>
+                    <span class="text-[9px] md:text-xs uppercase tracking-widest text-cream/70 font-sans mt-1">Secs</span>
+                </div>
+            </div>
+
+            <div class="mt-10">
+                <a href="#rsvp" class="inline-block bg-gold-400 hover:bg-gold-500 text-burgundy-900 font-semibold px-8 py-3.5 rounded-full text-xs uppercase tracking-widest transition-all duration-300 shadow-xl hover:shadow-gold-500/20 hover:-translate-y-0.5">
+                    Request The Pleasure of Your Company
+                </a>
+            </div>
+        </div>
+
+        <!-- Scroll Indicator -->
+        <div class="absolute bottom-6 left-1/2 -translate-x-1/2 text-center text-cream/70">
+            <a href="#our-story" class="flex flex-col items-center text-xs tracking-widest uppercase">
+                <span class="mb-2 text-[10px]">Scroll</span>
+                <i class="fas fa-chevron-down animate-bounce text-gold-300"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- Our Story Section -->
+    <section id="our-story" class="py-20 md:py-28 px-6 max-w-5xl mx-auto">
+        <div class="text-center mb-16">
+            <span class="font-script text-3xl md:text-4xl text-gold-400 block">Where It All Began</span>
+            <h2 class="font-serif text-3xl md:text-5xl text-burgundy-900 tracking-wide mt-1">Our Love Story</h2>
+            <div class="w-12 h-0.5 bg-gold-400 mx-auto mt-4"></div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+            <!-- Couple Image Frame -->
+            <div class="relative mx-auto w-full max-w-md">
+                <div class="absolute -inset-4 border-2 border-gold-300/60 rounded-t-full transform -rotate-3"></div>
+                <div class="relative overflow-hidden rounded-t-full shadow-2xl border-4 border-white aspect-[3/4]">
+                    <img src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?auto=format&fit=crop&w=800&q=80" alt="Julian & Eleanor" class="w-full h-full object-cover transform hover:scale-105 transition-transform duration-700">
+                </div>
+            </div>
+
+            <!-- Narrative -->
+            <div class="space-y-6 text-center md:text-left">
+                <h3 class="font-serif text-2xl md:text-3xl text-burgundy-800">"In all the world, there is no heart for me like yours."</h3>
+                <p class="text-gray-600 text-sm leading-relaxed">
+                    We met five years ago under the autumn trees of Boston Public Garden. What started as a casual conversation over lukewarm coffee quickly turned into endless late-night chats, spontaneous weekend getaways, and a deep understanding that we had found our lifelong companion.
+                </p>
+                <p class="text-gray-600 text-sm leading-relaxed">
+                    Last spring, surrounded by the serene coast of Big Sur, Julian popped the question. Now, we couldn't be more thrilled to step into this next beautiful chapter surrounded by the people who mean the most to us.
+                </p>
+                <div class="pt-4 flex justify-center md:justify-start items-center space-x-6 text-burgundy-800">
+                    <div class="text-center">
+                        <span class="block font-serif text-2xl text-gold-500">2021</span>
+                        <span class="text-[10px] uppercase tracking-widest text-gray-500">First Met</span>
+                    </div>
+                    <span class="text-gold-300">•</span>
+                    <div class="text-center">
+                        <span class="block font-serif text-2xl text-gold-500">2026</span>
+                        <span class="text-[10px] uppercase tracking-widest text-gray-500">Engaged</span>
+                    </div>
+                    <span class="text-gold-300">•</span>
+                    <div class="text-center">
+                        <span class="block font-serif text-2xl text-gold-500">2027</span>
+                        <span class="text-[10px] uppercase tracking-widest text-gray-500">Wedding</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Event Details Section -->
+    <section id="details" class="py-20 bg-burgundy-50 border-y border-gold-300/30 px-6">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-16">
+                <span class="font-script text-3xl md:text-4xl text-gold-400 block">When & Where</span>
+                <h2 class="font-serif text-3xl md:text-5xl text-burgundy-900 tracking-wide mt-1">Wedding Day Details</h2>
+                <div class="w-12 h-0.5 bg-gold-400 mx-auto mt-4"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
+                <!-- Ceremony Card -->
+                <div class="bg-cream p-8 md:p-10 rounded-2xl shadow-lg border border-gold-200 text-center relative flex flex-col justify-between hover:shadow-xl transition-shadow">
+                    <div class="absolute -top-6 left-1/2 -translate-x-1/2 bg-burgundy-800 text-gold-200 w-12 h-12 rounded-full flex items-center justify-center shadow-md">
+                        <i class="fas fa-church text-lg"></i>
+                    </div>
+                    
+                    <div class="pt-4">
+                        <span class="text-xs uppercase tracking-widest text-gold-500 font-semibold">The Ceremony</span>
+                        <h3 class="font-serif text-2xl md:text-3xl text-burgundy-900 mt-2 mb-4">St. Paul’s Cathedral</h3>
+                        <p class="text-gray-600 text-sm mb-6">4:00 PM – 5:15 PM</p>
+                        
+                        <p class="text-gray-500 text-xs leading-relaxed max-w-sm mx-auto mb-6">
+                            138 Tremont Street, Boston, MA 02111<br>
+                            Please arrive 20 minutes early. Ceremony will begin promptly.
+                        </p>
+                    </div>
+
+                    <div class="pt-4 border-t border-gray-100">
+                        <a href="https://maps.google.com" target="_blank" class="inline-flex items-center text-xs uppercase tracking-wider text-burgundy-800 hover:text-gold-500 font-semibold">
+                            <i class="fas fa-map-marker-alt mr-2 text-gold-400"></i> Get Directions
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Reception Card -->
+                <div class="bg-cream p-8 md:p-10 rounded-2xl shadow-lg border border-gold-200 text-center relative flex flex-col justify-between hover:shadow-xl transition-shadow">
+                    <div class="absolute -top-6 left-1/2 -translate-x-1/2 bg-burgundy-800 text-gold-200 w-12 h-12 rounded-full flex items-center justify-center shadow-md">
+                        <i class="fas fa-glass-cheers text-lg"></i>
+                    </div>
+
+                    <div class="pt-4">
+                        <span class="text-xs uppercase tracking-widest text-gold-500 font-semibold">The Reception</span>
+                        <h3 class="font-serif text-2xl md:text-3xl text-burgundy-900 mt-2 mb-4">The Grand Estate Gardens</h3>
+                        <p class="text-gray-600 text-sm mb-6">6:00 PM – 11:30 PM</p>
+                        
+                        <p class="text-gray-500 text-xs leading-relaxed max-w-sm mx-auto mb-6">
+                            450 Highland Avenue, Boston, MA 02481<br>
+                            Cocktail hour followed by dinner, toasts, and dancing.
+                        </p>
+                    </div>
+
+                    <div class="pt-4 border-t border-gray-100">
+                        <a href="https://maps.google.com" target="_blank" class="inline-flex items-center text-xs uppercase tracking-wider text-burgundy-800 hover:text-gold-500 font-semibold">
+                            <i class="fas fa-map-marker-alt mr-2 text-gold-400"></i> Get Directions
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-12">
+                <button onclick="addToCalendar()" class="inline-flex items-center border border-gold-400 text-burgundy-800 hover:bg-gold-400 hover:text-white px-8 py-3 rounded-full text-xs uppercase tracking-widest transition-all duration-300">
+                    <i class="far fa-calendar-plus mr-3"></i> Add To Calendar
+                </button>
+            </div>
+
+            <!-- Accommodations & Dress Code Note -->
+            <div class="mt-12 bg-burgundy-900 text-cream p-8 rounded-2xl shadow-md grid grid-cols-1 md:grid-cols-2 gap-8 text-center md:text-left border border-gold-300/30">
+                <div class="flex items-start space-x-4">
+                    <div class="text-gold-300 text-2xl mt-1"><i class="fas fa-user-tie"></i></div>
+                    <div>
+                        <h4 class="font-serif text-xl text-gold-200 mb-1">Dress Code</h4>
+                        <p class="text-xs text-cream/80 leading-relaxed">Black-Tie Optional. We request floor-length gowns for ladies and suits or tuxedos for gentlemen.</p>
+                    </div>
+                </div>
+                <div class="flex items-start space-x-4">
+                    <div class="text-gold-300 text-2xl mt-1"><i class="fas fa-hotel"></i></div>
+                    <div>
+                        <h4 class="font-serif text-xl text-gold-200 mb-1">Accommodations</h4>
+                        <p class="text-xs text-cream/80 leading-relaxed">A block of rooms has been reserved at The Ritz-Carlton Boston under "Julian & Eleanor Wedding".</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Schedule Section -->
+    <section id="schedule" class="py-20 px-6 max-w-4xl mx-auto">
+        <div class="text-center mb-16">
+            <span class="font-script text-3xl md:text-4xl text-gold-400 block">The Timeline</span>
+            <h2 class="font-serif text-3xl md:text-5xl text-burgundy-900 tracking-wide mt-1">Order of Events</h2>
+            <div class="w-12 h-0.5 bg-gold-400 mx-auto mt-4"></div>
+        </div>
+
+        <div class="relative border-l-2 border-gold-300/50 ml-4 md:ml-0 md:mx-auto md:max-w-2xl space-y-10 pl-6 md:pl-0">
+            <!-- Item 1 -->
+            <div class="relative md:flex items-center justify-between group">
+                <div class="absolute -left-[31px] md:left-1/2 md:-translate-x-1/2 top-0 w-4 h-4 rounded-full bg-gold-400 border-4 border-cream shadow-sm"></div>
+                
+                <div class="md:w-5/12 md:text-right pr-6">
+                    <span class="font-serif text-xl font-bold text-burgundy-900">3:30 PM</span>
+                    <h4 class="font-semibold text-sm text-gold-500 uppercase tracking-wider">Guest Arrival</h4>
+                </div>
+                <div class="md:w-5/12 pl-0 md:pl-6 text-xs text-gray-500 mt-1 md:mt-0">
+                    Welcome drinks served at the chapel entrance as guests are seated.
+                </div>
+            </div>
+
+            <!-- Item 2 -->
+            <div class="relative md:flex items-center justify-between group">
+                <div class="absolute -left-[31px] md:left-1/2 md:-translate-x-1/2 top-0 w-4 h-4 rounded-full bg-gold-400 border-4 border-cream shadow-sm"></div>
+                
+                <div class="md:w-5/12 md:text-right pr-6">
+                    <span class="font-serif text-xl font-bold text-burgundy-900">4:00 PM</span>
+                    <h4 class="font-semibold text-sm text-gold-500 uppercase tracking-wider">Holy Matrimony</h4>
+                </div>
+                <div class="md:w-5/12 pl-0 md:pl-6 text-xs text-gray-500 mt-1 md:mt-0">
+                    Exchange of vows, rings, and the solemn nuptial blessing.
+                </div>
+            </div>
+
+            <!-- Item 3 -->
+            <div class="relative md:flex items-center justify-between group">
+                <div class="absolute -left-[31px] md:left-1/2 md:-translate-x-1/2 top-0 w-4 h-4 rounded-full bg-gold-400 border-4 border-cream shadow-sm"></div>
+                
+                <div class="md:w-5/12 md:text-right pr-6">
+                    <span class="font-serif text-xl font-bold text-burgundy-900">6:00 PM</span>
+                    <h4 class="font-semibold text-sm text-gold-500 uppercase tracking-wider">Cocktail Hour</h4>
+                </div>
+                <div class="md:w-5/12 pl-0 md:pl-6 text-xs text-gray-500 mt-1 md:mt-0">
+                    Signature cocktails, hors d'oeuvres, and live acoustic music on the terrace.
+                </div>
+            </div>
+
+            <!-- Item 4 -->
+            <div class="relative md:flex items-center justify-between group">
+                <div class="absolute -left-[31px] md:left-1/2 md:-translate-x-1/2 top-0 w-4 h-4 rounded-full bg-gold-400 border-4 border-cream shadow-sm"></div>
+                
+                <div class="md:w-5/12 md:text-right pr-6">
+                    <span class="font-serif text-xl font-bold text-burgundy-900">7:30 PM</span>
+                    <h4 class="font-semibold text-sm text-gold-500 uppercase tracking-wider">Dinner & Speeches</h4>
+                </div>
+                <div class="md:w-5/12 pl-0 md:pl-6 text-xs text-gray-500 mt-1 md:mt-0">
+                    A multi-course gourmet dinner followed by toasts from family and friends.
+                </div>
+            </div>
+
+            <!-- Item 5 -->
+            <div class="relative md:flex items-center justify-between group">
+                <div class="absolute -left-[31px] md:left-1/2 md:-translate-x-1/2 top-0 w-4 h-4 rounded-full bg-gold-400 border-4 border-cream shadow-sm"></div>
+                
+                <div class="md:w-5/12 md:text-right pr-6">
+                    <span class="font-serif text-xl font-bold text-burgundy-900">9:30 PM</span>
+                    <h4 class="font-semibold text-sm text-gold-500 uppercase tracking-wider">Dancing & Celebration</h4>
+                </div>
+                <div class="md:w-5/12 pl-0 md:pl-6 text-xs text-gray-500 mt-1 md:mt-0">
+                    First dance, cake cutting, and partying late into the night.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Photo Gallery Section -->
+    <section id="gallery" class="py-20 bg-burgundy-50 border-t border-gold-300/30 px-6">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-16">
+                <span class="font-script text-3xl md:text-4xl text-gold-400 block">Captured Moments</span>
+                <h2 class="font-serif text-3xl md:text-5xl text-burgundy-900 tracking-wide mt-1">Our Gallery</h2>
+                <div class="w-12 h-0.5 bg-gold-400 mx-auto mt-4"></div>
+            </div>
+
+            <!-- Gallery Grid -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
+                <div class="relative overflow-hidden rounded-lg group cursor-pointer aspect-square shadow-md" onclick="openLightbox('https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=1200&q=80')">
+                    <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=600&q=80" alt="Gallery 1" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-burgundy-900/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white">
+                        <i class="fas fa-search-plus text-2xl"></i>
+                    </div>
+                </div>
+
+                <div class="relative overflow-hidden rounded-lg group cursor-pointer aspect-square shadow-md" onclick="openLightbox('https://images.unsplash.com/photo-1522673607200-164d1b6ce486?auto=format&fit=crop&w=1200&q=80')">
+                    <img src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?auto=format&fit=crop&w=600&q=80" alt="Gallery 2" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-burgundy-900/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white">
+                        <i class="fas fa-search-plus text-2xl"></i>
+                    </div>
+                </div>
+
+                <div class="relative overflow-hidden rounded-lg group cursor-pointer aspect-square shadow-md" onclick="openLightbox('https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=1200&q=80')">
+                    <img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=600&q=80" alt="Gallery 3" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-burgundy-900/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white">
+                        <i class="fas fa-search-plus text-2xl"></i>
+                    </div>
+                </div>
+
+                <div class="relative overflow-hidden rounded-lg group cursor-pointer aspect-square shadow-md" onclick="openLightbox('https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?auto=format&fit=crop&w=1200&q=80')">
+                    <img src="https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?auto=format&fit=crop&w=600&q=80" alt="Gallery 4" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-burgundy-900/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white">
+                        <i class="fas fa-search-plus text-2xl"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Lightbox Modal -->
+    <div id="lightbox" class="fixed inset-0 z-50 bg-black/90 hidden items-center justify-center p-4" onclick="closeLightbox()">
+        <button class="absolute top-6 right-6 text-white text-3xl focus:outline-none">&times;</button>
+        <img id="lightboxImg" src="" alt="Enlarged gallery photo" class="max-w-full max-h-[85vh] rounded shadow-2xl object-contain">
+    </div>
+
+    <!-- Registry Section -->
+    <section class="py-20 px-6 max-w-4xl mx-auto text-center">
+        <span class="font-script text-3xl md:text-4xl text-gold-400 block">With Gratitude</span>
+        <h2 class="font-serif text-3xl md:text-5xl text-burgundy-900 tracking-wide mt-1">Gift Registry</h2>
+        <div class="w-12 h-0.5 bg-gold-400 mx-auto mt-4 mb-8"></div>
+
+        <p class="text-gray-600 text-sm leading-relaxed max-w-xl mx-auto mb-10">
+            Your presence at our wedding is the greatest gift of all. However, if you wish to honor us with a gift, we have registered at the following stores:
+        </p>
+
+        <div class="flex flex-wrap justify-center items-center gap-6">
+            <a href="#" class="bg-cream border border-gold-200 hover:border-gold-400 px-8 py-4 rounded-xl shadow-sm hover:shadow-md transition-all font-serif text-xl text-burgundy-900 flex items-center space-x-3">
+                <i class="fas fa-gift text-gold-400"></i>
+                <span>Crate & Barrel</span>
+            </a>
+            <a href="#" class="bg-cream border border-gold-200 hover:border-gold-400 px-8 py-4 rounded-xl shadow-sm hover:shadow-md transition-all font-serif text-xl text-burgundy-900 flex items-center space-x-3">
+                <i class="fas fa-store text-gold-400"></i>
+                <span>Williams Sonoma</span>
+            </a>
+            <a href="#" class="bg-cream border border-gold-200 hover:border-gold-400 px-8 py-4 rounded-xl shadow-sm hover:shadow-md transition-all font-serif text-xl text-burgundy-900 flex items-center space-x-3">
+                <i class="fas fa-plane text-gold-400"></i>
+                <span>Honeymoon Fund</span>
+            </a>
+        </div>
+    </section>
+
+    <section id="rsvp" class="py-20 bg-burgundy-900 text-cream px-6 relative border-t border-gold-300/30">
+        <div class="max-w-3xl mx-auto">
+            <div class="text-center mb-12">
+                <span class="font-script text-3xl md:text-4xl text-gold-300 block">Please Respond</span>
+                <h2 class="font-serif text-3xl md:text-5xl text-cream tracking-wide mt-1">R.S.V.P.</h2>
+                <p class="text-xs uppercase tracking-widest text-gold-200/80 mt-3">Kindly respond by August 1, 2027</p>
+                <div class="w-12 h-0.5 bg-gold-400 mx-auto mt-4"></div>
+            </div>
+
+            <!-- Form Frame -->
+            <div class="bg-cream text-charcoal p-8 md:p-12 rounded-2xl shadow-2xl border border-gold-300/40 relative">
+                
+                <form id="rsvpForm" onsubmit="handleRSVP(event)" class="space-y-6">
+                    <div>
+                        <label class="block text-xs uppercase tracking-wider font-semibold text-burgundy-900 mb-2">Full Name *</label>
+                        <input type="text" required placeholder="John & Jane Doe" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-gold-400 focus:border-transparent outline-none text-sm transition-all bg-white">
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-xs uppercase tracking-wider font-semibold text-burgundy-900 mb-2">Email Address *</label>
+                            <input type="email" required placeholder="john@example.com" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-gold-400 focus:border-transparent outline-none text-sm transition-all bg-white">
+                        </div>
+                        <div>
+                            <label class="block text-xs uppercase tracking-wider font-semibold text-burgundy-900 mb-2">Attendance *</label>
+                            <select id="attendanceSelect" onchange="toggleGuestFields()" required class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-gold-400 focus:border-transparent outline-none text-sm transition-all bg-white">
+                                <option value="accepted">Joyfully Accepts</option>
+                                <option value="declined">Regretfully Declines</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div id="guestDetails" class="space-y-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-xs uppercase tracking-wider font-semibold text-burgundy-900 mb-2">Number of Guests</label>
+                                <select class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-gold-400 focus:border-transparent outline-none text-sm transition-all bg-white">
+                                    <option value="1">1 Person</option>
+                                    <option value="2">2 Persons</option>
+                                    <option value="3">3 Persons</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-xs uppercase tracking-wider font-semibold text-burgundy-900 mb-2">Dietary Restrictions</label>
+                                <input type="text" placeholder="e.g. Vegetarian, Gluten-free" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-gold-400 focus:border-transparent outline-none text-sm transition-all bg-white">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs uppercase tracking-wider font-semibold text-burgundy-900 mb-2">Message for the Bride & Groom</label>
+                        <textarea rows="3" placeholder="Share your warm wishes..." class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-gold-400 focus:border-transparent outline-none text-sm transition-all bg-white"></textarea>
+                    </div>
+
+                    <button type="submit" class="w-full bg-burgundy-800 hover:bg-burgundy-900 text-gold-200 font-semibold py-4 rounded-lg text-xs uppercase tracking-widest transition-all duration-300 shadow-lg hover:shadow-xl">
+                        Send Response
+                    </button>
+                </form>
+
+                <!-- Success Confirmation Message -->
+                <div id="rsvpSuccess" class="hidden text-center py-10 space-y-4">
+                    <div class="w-16 h-16 bg-gold-100 text-gold-600 rounded-full flex items-center justify-center mx-auto text-2xl border border-gold-300">
+                        <i class="fas fa-check"></i>
+                    </div>
+                    <h3 class="font-serif text-3xl text-burgundy-900">Response Received!</h3>
+                    <p class="text-gray-600 text-sm max-w-md mx-auto">
+                        Thank you for RSVPing. We are so excited to celebrate our special day with you!
+                    </p>
+                    <button onclick="resetRSVPForm()" class="mt-4 inline-block text-xs uppercase tracking-widest text-gold-600 hover:underline">Submit another response</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final Greetings Section -->
+    <section class="py-20 px-6 max-w-3xl mx-auto text-center border-t border-gold-300/30">
+        <div class="space-y-6">
+            <span class="font-script text-4xl text-gold-500 block">With Love & Gratitude</span>
+            <h2 class="font-serif text-3xl md:text-4xl text-burgundy-900 tracking-wide">We Can't Wait To Celebrate With You</h2>
+            <div class="w-16 h-0.5 bg-gold-400 mx-auto my-4"></div>
+            
+            <p class="text-gray-600 font-serif italic text-lg leading-relaxed max-w-xl mx-auto">
+                "Your love, support, and presence in our lives mean the world to us. Thank you for being a part of our journey and sharing in the joy of our wedding day."
+            </p>
+
+            <div class="pt-6">
+                <span class="font-script text-5xl md:text-6xl text-burgundy-800 block">Julian & Eleanor</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer class="bg-burgundy-900 text-cream/60 py-12 text-center border-t border-gold-500/20 px-6">
+        <p class="font-serif text-3xl text-gold-300 mb-2">Julian & Eleanor</p>
+        <p class="text-xs tracking-widest uppercase mb-6">09.18.2027 • Boston, MA</p>
+        <p class="text-[10px] text-cream/40">Made with love for our special day.</p>
+    </footer>
+
+    <script>
+        // Envelope Opening Logic
+        let envelopeOpened = false;
+        document.body.classList.add('modal-active');
+
+        function openEnvelope() {
+            if (envelopeOpened) return;
+            envelopeOpened = true;
+
+            const overlay = document.getElementById('envelopeOverlay');
+            document.getElementById('envelope').classList.add('is-open');   // flap opens, card slides out
+            document.getElementById('envStage').classList.add('is-open');
+            document.getElementById('envHint').classList.add('is-hidden');
+
+            // Start music right on the click (browsers only allow audio after a user gesture)
+            toggleAudio();
+
+            // Let the card be read for a moment, then fade the envelope away
+            setTimeout(() => {
+                overlay.classList.add('opacity-0', 'pointer-events-none');
+                setTimeout(() => {
+                    overlay.style.display = 'none';
+                    document.body.classList.remove('modal-active');
+                }, 1000);
+            }, 3200);
         }
 
-        // 6. Countdown Timer Logic
-        function initCountdown() {
-            const targetDate = new Date('2026-12-18T16:30:00').getTime();
+        // Set Wedding Date for Countdown (September 18, 2027)
+        const weddingDate = new Date("September 18, 2027 16:00:00").getTime();
 
-            function updateTimer() {
-                const now = new Date().getTime();
-                const diff = targetDate - now;
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const distance = weddingDate - now;
 
-                if (diff <= 0) return;
-
-                const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-                const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-                const secs = Math.floor((diff % (1000 * 60)) / 1000);
-
-                document.getElementById('timer-days').innerText = String(days).padStart(2, '0');
-                document.getElementById('timer-hours').innerText = String(hours).padStart(2, '0');
-                document.getElementById('timer-minutes').innerText = String(mins).padStart(2, '0');
-                document.getElementById('timer-seconds').innerText = String(secs).padStart(2, '0');
+            if (distance < 0) {
+                document.getElementById("countdown").innerHTML = "<p class='col-span-4 font-serif text-2xl text-gold-200'>Today is the Big Day!</p>";
+                return;
             }
 
-            updateTimer();
-            setInterval(updateTimer, 1000);
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById("days").innerText = days < 10 ? '0' + days : days;
+            document.getElementById("hours").innerText = hours < 10 ? '0' + hours : hours;
+            document.getElementById("minutes").innerText = minutes < 10 ? '0' + minutes : minutes;
+            document.getElementById("seconds").innerText = seconds < 10 ? '0' + seconds : seconds;
         }
 
-        // On DOM Load Setup
-        window.addEventListener('DOMContentLoaded', () => {
-            initScratchCard();
-            initGallery();
-            initCountdown();
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
 
-            const musicBtn = document.getElementById('music-toggle');
-            if (musicBtn) {
-                musicBtn.addEventListener('click', toggleMusic);
+        // Audio Music Player Handler
+        let isPlaying = false;
+        const audio = document.getElementById('weddingMusic');
+        const musicIcon = document.getElementById('musicIcon');
+
+        function toggleAudio() {
+            if (isPlaying) {
+                audio.pause();
+                musicIcon.className = 'fas fa-music text-lg';
+            } else {
+                audio.play().then(() => {
+                    musicIcon.className = 'fas fa-pause text-lg';
+                }).catch(err => console.log("Audio playback prevented:", err));
             }
-        });
+            isPlaying = !isPlaying;
+        }
+
+        // RSVP Form Conditional Fields
+        function toggleGuestFields() {
+            const select = document.getElementById('attendanceSelect');
+            const guestDetails = document.getElementById('guestDetails');
+            if (select.value === 'declined') {
+                guestDetails.style.display = 'none';
+            } else {
+                guestDetails.style.display = 'block';
+            }
+        }
+
+        // RSVP Form Submission
+        function handleRSVP(event) {
+            event.preventDefault();
+            
+            // Trigger Gold Confetti
+            if (typeof confetti === 'function') {
+                confetti({
+                    particleCount: 100,
+                    spread: 70,
+                    origin: { y: 0.6 },
+                    colors: ['#A33345', '#E2B27E', '#F4D3B0']
+                });
+            }
+
+            document.getElementById('rsvpForm').classList.add('hidden');
+            document.getElementById('rsvpSuccess').classList.remove('hidden');
+        }
+
+        function resetRSVPForm() {
+            document.getElementById('rsvpForm').reset();
+            document.getElementById('rsvpForm').classList.remove('hidden');
+            document.getElementById('rsvpSuccess').classList.add('hidden');
+            toggleGuestFields();
+        }
+
+        // Gallery Lightbox
+        function openLightbox(src) {
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.getElementById('lightboxImg');
+            lightboxImg.src = src;
+            lightbox.classList.remove('hidden');
+            lightbox.classList.add('flex');
+            document.body.classList.add('modal-active');
+        }
+
+        function closeLightbox() {
+            const lightbox = document.getElementById('lightbox');
+            lightbox.classList.add('hidden');
+            lightbox.classList.remove('flex');
+            document.body.classList.remove('modal-active');
+        }
+
     </script>
+
+<script>
+(function(){
+/* always begin at the very top (hero) after a refresh */
+if('scrollRestoration' in history)history.scrollRestoration='manual';
+if(location.hash)history.replaceState(null,'',location.pathname+location.search);
+const top=()=>window.scrollTo(0,0);top();
+addEventListener('load',top);addEventListener('pageshow',top);addEventListener('beforeunload',top);
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)],R=Math.random;
+const GOLD=['#E2B27E','#F4D3B0','#C88D4D','#F5B8CC','#A33345'];
+
+/* ---- Envelope: floating gold dust, 3D tilt, confetti burst ---- */
+const overlay=$('#envelopeOverlay'),env=$('#envelope');
+const dust=document.createElement('canvas');dust.id='dust';overlay.prepend(dust);
+const dc=dust.getContext('2d');let D=[];
+function dsize(){dust.width=innerWidth;dust.height=innerHeight}dsize();addEventListener('resize',dsize);
+for(let i=0;i<60;i++)D.push({x:R()*innerWidth,y:R()*innerHeight,r:.6+R()*2,s:.15+R()*.5,a:R()*6});
+(function dl(){if(overlay.style.display==='none')return;dc.clearRect(0,0,dust.width,dust.height);
+ D.forEach(p=>{p.y-=p.s;p.a+=.02;p.x+=Math.sin(p.a)*.4;if(p.y<-5){p.y=dust.height+5;p.x=R()*dust.width}
+  dc.globalAlpha=.35+Math.sin(p.a*2)*.3;dc.fillStyle='#F4D3B0';dc.beginPath();dc.arc(p.x,p.y,p.r,0,7);dc.fill()});
+ requestAnimationFrame(dl)})();
+overlay.addEventListener('mousemove',e=>{if(envelopeOpened)return;
+ const x=e.clientX/innerWidth-.5,y=e.clientY/innerHeight-.5;
+ env.style.transform=`rotateY(${x*18}deg) rotateX(${-y*18}deg)`});
+const _open=window.openEnvelope;
+window.openEnvelope=function(){
+ if(envelopeOpened)return;_open();top();env.style.transform='';
+ setTimeout(()=>confetti({particleCount:140,spread:100,startVelocity:35,origin:{y:.45},colors:GOLD,zIndex:100}),1100);
+ setTimeout(()=>document.body.classList.add('hero-ready'),3300);
+};
+$$('section:first-of-type .max-w-3xl > *').forEach((e,i)=>{e.classList.add('hero-in');e.style.setProperty('--d',(i*.25)+'s')});
+
+/* ---- Elegant touches ---- */
+$$('.w-12.bg-gold-400,section:first-of-type .w-24').forEach(d=>{const o=document.createElement('div');o.className='orn';o.innerHTML='<i></i><b></b><i></i>';d.replaceWith(o)});
+const sel='#our-story .text-center.mb-16,#our-story .grid>div,#details .text-center.mb-16,#details .grid>div,#details .mt-12,#schedule .text-center.mb-16,#schedule .group,#gallery .text-center.mb-16,#gallery .grid>div,#rsvp .text-center.mb-12,#rsvp .bg-cream,section:not([id]):not(:first-of-type) > *';
+const FL='#our-story .grid>div:first-child,#details .grid>div,#gallery .grid>div,section:not([id]):not(:first-of-type) .flex-wrap>a';
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){const t=e.target;t.classList.add('in');io.unobserve(t);
+ if(t.matches(FL))setTimeout(()=>{t.style.setProperty('--fd',(-Math.random()*6)+'s');t.style.setProperty('--fdur',(3.5+Math.random()*2)+'s');t.classList.add('floaty')},1600)}}),{threshold:.12});
+$('section:first-of-type .max-w-3xl').classList.add('floaty');
+$$(sel).forEach(e=>{e.classList.add('reveal');io.observe(e)});
+
+/* ---- Lightbox with next / prev / keyboard ---- */
+const imgs=$$('#gallery [onclick^="openLightbox"]').map(e=>e.getAttribute('onclick').match(/'(.*?)'/)[1]);let idx=0;
+const lb=$('#lightbox');
+function go(d){idx=(idx+d+imgs.length)%imgs.length;$('#lightboxImg').src=imgs[idx]}
+[['‹',-1,'left-0'],['›',1,'right-0']].forEach(([t,d,pos])=>{const b=document.createElement('button');
+ b.className='lb-arrow '+pos;b.textContent=t;b.onclick=e=>{e.stopPropagation();go(d)};lb.appendChild(b)});
+window.openLightbox=function(src){idx=Math.max(0,imgs.indexOf(src));$('#lightboxImg').src=imgs[idx];
+ lb.classList.remove('hidden');lb.classList.add('flex');document.body.classList.add('modal-active')};
+addEventListener('keydown',e=>{if(lb.classList.contains('hidden'))return;
+ if(e.key==='Escape')closeLightbox();if(e.key==='ArrowRight')go(1);if(e.key==='ArrowLeft')go(-1)});
+
+/* ---- Add to calendar (.ics) ---- */
+window.addToCalendar=function(){
+ const ics=['BEGIN:VCALENDAR','VERSION:2.0','BEGIN:VEVENT','DTSTART:20270918T160000','DTEND:20270918T233000',
+ 'SUMMARY:Julian & Eleanor\'s Wedding','LOCATION:St. Paul\'s Cathedral\\, 138 Tremont Street\\, Boston\\, MA',
+ 'DESCRIPTION:Ceremony 4:00 PM at the Cathedral; reception 6:00 PM at The Grand Estate Gardens.','END:VEVENT','END:VCALENDAR'].join('\r\n');
+ const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([ics],{type:'text/calendar'}));
+ a.download='Julian-Eleanor-Wedding.ics';a.click();
+ confetti({particleCount:60,spread:60,origin:{y:.7},colors:GOLD})};
+})();
+</script>
 </body>
 </html>
